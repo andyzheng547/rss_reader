@@ -26,6 +26,9 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# Convert Active Record Models to json format
+gem 'active_model_serializers'
+
 gem 'angularjs-rails'
 gem 'angular-ui-router-rails'
 gem 'angular-rails-templates'
