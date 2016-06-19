@@ -37,6 +37,9 @@ group :development, :test do
   # RSpec and Jasmine testing frameworks
   gem 'rspec-rails'
   gem 'jasmine'
+
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
 end
 
 group :development do

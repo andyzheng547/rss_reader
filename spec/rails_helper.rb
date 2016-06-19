@@ -56,8 +56,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # Clean the test database after every spec
   DatabaseCleaner.strategy = :truncation
-
   config.after(:each) do
     DatabaseCleaner.clean
   end
