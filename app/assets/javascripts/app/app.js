@@ -1,26 +1,67 @@
 angular
-  .module('RssReaderApp', ['ui.router', 'ngSanitize'])
+  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'templates'])
   .config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'home.html',
+        controller: 'HomeController as home',
+        resolve: {}
+      })
       .state('user', {
         url: '/user',
-        templateUrl: 'templates/user.html',
+        templateUrl: 'user.html',
         controller: 'UserController as user',
         resolve: {}
       })
       .state('user.login', {
         url: '/login',
-        templateUrl: 'templates/user/login.html',
+        templateUrl: 'user/login.html',
         controller: 'UserController as user',
         resolve: {}
       })
       .state('user.register', {
         url: '/register',
-        templateUrl: 'templates/user/register.html',
+        templateUrl: 'user/register.html',
         controller: 'UserController as user',
         resolve: {}
-      });
-
-      $urlRouterProvider.otherwise('/user');
+      })
+      .state('user.logoff', {
+        url: '/logoff',
+        templateUrl: 'user/register.html',
+        controller: 'UserController as user',
+        resolve: {}
+      })
+      .state('feed', {
+        url: '/feed',
+        templateUrl: 'feed.html',
+        controller: 'FeedController as feed',
+        resolve: {}
+      })
+      .state('feed.all', {
+        url: '/feed/all',
+        templateUrl: 'feed/all.html',
+        controller: 'FeedController as feed',
+        resolve: {}
+      })
+      .state('feed.read', {
+        url: '/feed/read',
+        templateUrl: 'feed/read.html',
+        controller: 'FeedController as feed',
+        resolve: {}
+      })
+      .state('feed.manage', {
+        url: '/feed/manage',
+        templateUrl: 'feed/manage.html',
+        controller: 'FeedController as feed',
+        resolve: {}
+      })
+      .state('feed.create', {
+        url: '/feed/create',
+        templateUrl: 'feed/create.html',
+        controller: 'FeedController as feed',
+        resolve: {}
+      })
   });
