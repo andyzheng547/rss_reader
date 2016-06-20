@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     render json: @user, status: 204
   end
 
+  # GET /users/find
   def find
     @user = User.find_by(user_params)
 
