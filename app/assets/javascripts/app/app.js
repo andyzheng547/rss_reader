@@ -30,7 +30,7 @@ angular
       })
       .state('user.logoff', {
         url: '/logoff',
-        templateUrl: 'user/register.html',
+        templateUrl: 'user/logoff.html',
         controller: 'UserController as user',
         resolve: {}
       })
@@ -41,25 +41,25 @@ angular
         resolve: {}
       })
       .state('feed.all', {
-        url: '/feed/all',
+        url: '/all',
         templateUrl: 'feed/all.html',
         controller: 'FeedController as feed',
         resolve: {}
       })
       .state('feed.read', {
-        url: '/feed/read',
+        url: '/read',
         templateUrl: 'feed/read.html',
         controller: 'FeedController as feed',
         resolve: {}
       })
       .state('feed.manage', {
-        url: '/feed/manage',
+        url: '/manage',
         templateUrl: 'feed/manage.html',
         controller: 'FeedController as feed',
         resolve: {}
       })
       .state('feed.create', {
-        url: '/feed/create',
+        url: '/create',
         templateUrl: 'feed/create.html',
         controller: 'FeedController as feed',
         resolve: {}
