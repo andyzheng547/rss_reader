@@ -3,12 +3,24 @@ angular
   .config(function($stateProvider, $urlRouterProvider){
 
     $stateProvider
-      .state('login', {
+      .state('user', {
+        url: '/user',
+        templateUrl: 'templates/user.html',
+        controller: 'UserController as user',
+        resolve: {}
+      })
+      .state('user.login', {
         url: '/login',
-        templateUrl: 'login.html',
-        controller: 'LoginController as login',
-        resolve: {
-          
-        }
+        templateUrl: 'templates/user/login.html',
+        controller: 'UserController as user',
+        resolve: {}
+      })
+      .state('user.register', {
+        url: '/register',
+        templateUrl: 'templates/user/register.html',
+        controller: 'UserController as user',
+        resolve: {}
       });
+
+      $urlRouterProvider.otherwise('/user');
   });

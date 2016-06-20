@@ -34,6 +34,17 @@ class UsersController < ApplicationController
     render json: @user, status: 204
   end
 
+  def find
+    @user = User.find_by(user_params)
+
+    if @user
+      render json: @user, status: 200
+    else
+      render json: @user.errors, status: 404
+    end
+
+  end
+
 private
   def user_params
       params.require(:user).permit(:username, :password)
