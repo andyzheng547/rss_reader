@@ -1,5 +1,21 @@
 class UsersController < ApplicationController
+  require 'json'
 
+  # GET /users/find
+  def find
+    user_params = JSON.parse(params[:user])
+
+    @user = User.find_by(user_params[:username])
+
+    if @user.authenticate(user_params["password"])
+      render json: @user, status: 200
+    else
+      render json: @user, status: 404
+    end
+
+  end
+
+  # GET /users/:id
   def show
     @user = User.find(params[:id])
 
@@ -12,7 +28,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user, status: 201
     else
-      render json: @user.errors, status: 422
+      render json: @user, status: 422
     end
   end
 
@@ -22,7 +38,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user, status: 200
     else
-      render json: @user.errors, status: 422
+      render json: @user, status: 422
     end
   end
 
@@ -34,21 +50,10 @@ class UsersController < ApplicationController
     render json: @user, status: 204
   end
 
-  # GET /users/find
-  def find
-    @user = User.find_by(user_params)
 
-    if @user
-      render json: @user, status: 200
-    else
-      render json: @user.errors, status: 404
-    end
-
-  end
-
-private
-  def user_params
-      params.require(:user).permit(:username, :password)
-  end
+# private
+#   def user_params
+#       params.require(:user).permit(:username, :password)
+#   end
 
 end

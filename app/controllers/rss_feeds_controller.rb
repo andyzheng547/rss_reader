@@ -12,7 +12,7 @@ class RssFeedsController < ApplicationController
     if @rss.save
       render json: @rss, status: 201
     else
-      render json: @rss.errors, status: 422
+      render json: @rss, status: 422
     end
   end
 
@@ -22,7 +22,7 @@ class RssFeedsController < ApplicationController
     if @rss.update(user_params)
       render json: @rss, status: 200
     else
-      render json: @rss.errors, status: 422
+      render json: @rss, status: 422
     end
   end
 

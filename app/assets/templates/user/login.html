@@ -1,1 +1,9 @@
 user.login placeholder
+
+<form ng-submit="user.findUser(userParams)">
+  <input type="text" name="username" placeholder="Username" ng-model="userParams.username">
+  <input type="text" name="password" placeholder="Password" ng-model="userParams.password">
+  <input type="submit">
+</form>
+
+{{userParams}}
