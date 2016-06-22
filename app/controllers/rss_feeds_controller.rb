@@ -12,7 +12,7 @@ class RssFeedsController < ApplicationController
     if @rss.save
       render json: @rss, status: 201
     else
-      render json: @rss, status: 422
+      render json: {errors: @rss.errors, status: 422}
     end
   end
 
@@ -22,7 +22,7 @@ class RssFeedsController < ApplicationController
     if @rss.update(user_params)
       render json: @rss, status: 200
     else
-      render json: @rss, status: 422
+      render json: {errors: @rss.errors, status: 422}
     end
   end
 
@@ -30,11 +30,15 @@ class RssFeedsController < ApplicationController
     @rss = RssFeed.find(params[:id])
     @rss.destroy
 
-    render json: @rss, status: 204
+    render json: {errors: @rss.errors, status: 204}
   end
 
 private
   def rss_params
-    params.require(:rss).permit(:user_id, :rss_link, :link, :title, :description)
+    # If params[:rss] is a json string, parse and return the json string
+    # else return permitted parameters
+    params[:rss].is_a?(String) ?
+      params[:rss] = JSON.stringify(params[:rss]) :
+      params.require(:rss).permit(:user_id, :rss_link, :link, :title, :description)
   end
 end

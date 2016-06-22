@@ -3,14 +3,13 @@ function UserController($http, SharedDataService) {
   this.findUser = function(userParams){
     $http.get('/users/find', {params: {user: userParams}} ).then(
       function successCallback(resp) {
-        alert(resp.status);
-        console.log('Server responded with: ' + resp.status + '\nThis is the response data: ' + JSON.stringify(resp.data));
-      }, function errorCallback(error) {
-        alert(error.status);
-        console.log('Server responded with: ' + error.status + '\nThis is the response data: ' + error.data);
+        console.log('User found: ' + JSON.stringify(resp.data.user.id));
+      }, function errorCallback(resp) {
+        console.log('Server responded with: ' + resp.status + '\nThis is the response data: ' + JSON.stringify(resp.data.errors));
       }
     );
   }
+
 
   //
   //

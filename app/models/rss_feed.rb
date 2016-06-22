@@ -1,4 +1,4 @@
 class RssFeed < ActiveRecord::Base
   belongs_to :user
-  validates_presence_of :user_id, :rss_link, :title
+  validates :user_id, :rss_link, :title, presence: true
 end
