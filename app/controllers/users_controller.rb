@@ -3,9 +3,9 @@ class UsersController < ApplicationController
 
   # GET /users/find
   def find
-    @user = User.find_by(username: user_params[:username])
+    @user = User.find_by(username: user_params["username"])
 
-    if @user && @user.authenticate(user_params[:password])
+    if @user && @user.authenticate(user_params["password"])
       render json: @user, status: 200
     else
       render json: {errors: {user: "could not find user"}}, status: 404
