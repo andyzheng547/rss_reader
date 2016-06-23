@@ -34,6 +34,12 @@ angular
         controller: 'UserController as user',
         resolve: {}
       })
+      .state('user.profile', {
+        url: '/user/profile',
+        templateUrl: 'user/profile.html',
+        controller: 'UserController as user',
+        resolve: {}
+      })
       .state('feed', {
         url: '/feed',
         templateUrl: 'feed.html',
