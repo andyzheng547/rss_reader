@@ -1,34 +1,32 @@
-angular.module('RssReaderApp').factory('SharedDataService', function($http) {
-  var userId;
-  var loggedIn = false;
+angular.module('RssReaderApp')
+  .service('SharedDataService', function($http) {
 
-  function findUser(params){
-    return $http.post('/users/find', params)
-  }
+    var self = this;
+    this.currentUser;
+    this.userId;
+    this.loggedIn = false;
 
-  function getUserId(){
-    return userId;
-  }
+    this.getUserId = function(){
+      return userId;
+    };
 
-  function getUserLoginStatus(){
-    return loggedIn;
-  }
+    this.getUserLoginStatus = function(){
+      return loggedIn;
+    };
 
-  function loginUser(id){
-    userId = id;
-    loggedIn = true;
-  }
+    this.setUserId = function(id){
+      this.userId = id;
+      this.loggedIn = true;
+    };
 
-  function logoffUser(){
-    userId = undefined;
-    loggedIn = false;
-  }
+    this.setCurrentUser = function(user){
+      this.currentUser = user;
+      self.setUserId(user.id);
+    };
 
-  return {
-    findUser: findUser,
-    getUserId: getUserId,
-    getUserLoginStatus: getUserLoginStatus,
-    loginUser: loginUser,
-    logoffUser: logoffUser
-  }
-});
+    this.clearUserId = function(){
+      this.userId = undefined;
+      this.loggedIn = false;
+    };
+
+  });

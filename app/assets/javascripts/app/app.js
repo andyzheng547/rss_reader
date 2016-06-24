@@ -44,50 +44,30 @@ angular
         url: '/feed',
         templateUrl: 'feed.html',
         controller: 'FeedController as feed',
-        resolve: {
-          userFeeds: function(UserService, SharedDataService){
-            return UserService.getUserFeeds(SharedDataService.getUserId());
-          }
-        }
+        resolve: {}
       })
       .state('feed.all', {
         url: '/all',
         templateUrl: 'feed/all.html',
         controller: 'FeedController as feed',
-        resolve: {
-          userFeeds: function(UserService, SharedDataService){
-            return UserService.getUserFeeds(SharedDataService.getUserId());
-          }
-        }
+        resolve: {}
       })
       .state('feed.read', {
         url: '/read',
         templateUrl: 'feed/read.html',
         controller: 'FeedController as feed',
-        resolve: {
-          userFeeds: function(UserService, SharedDataService){
-            return UserService.getUserFeeds(SharedDataService.getUserId());
-          }
-        }
+        resolve: {}
       })
       .state('feed.manage', {
         url: '/manage',
         templateUrl: 'feed/manage.html',
         controller: 'FeedController as feed',
-        resolve: {
-          userFeeds: function(UserService, SharedDataService){
-            return UserService.getUserFeeds(SharedDataService.getUserId());
-          }
-        }
+        resolve: {}
       })
       .state('feed.create', {
         url: '/create',
         templateUrl: 'feed/create.html',
         controller: 'FeedController as feed',
-        resolve: {
-          userFeeds: function(UserService, SharedDataService){
-            return UserService.getUserFeeds(SharedDataService.getUserId());
-          }
-        }
+        resolve: {}
       })
   });
