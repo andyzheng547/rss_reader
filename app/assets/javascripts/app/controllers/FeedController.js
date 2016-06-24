@@ -1,41 +1,47 @@
-function FeedController($http, SharedDataService) {
-  // EITHER NEED TO CREATE ROUTE ON BACKEND TO GET USER FEEDS OR PASS IN DATA TO CONTROLLER WHEN INITIALIZED
-
+function FeedController($http, SharedDataService, GoogleFeedsService) {
   // When feed is clicked in feed.all, get the rss link attribute in the feed tab
   // Call the getFeed() function and set the currentFeed to the returned data
   this.currentFeed;
+  this.userFeeds;
 
-  // this.createFeed = function(data){
-  //   $http.post('/feeds', data: data).then(function successCallback(resp){
-  //
-  //   }, function errorCallback(resp){
-  //
-  //   });
-  // };
-  //
-  // this.updateFeed = function(data){
-  //   $http.put('/feeds/' + data.id, data: data).then(function successCallback(resp){
-  //
-  //   }, function errorCallback(resp){
-  //
-  //   });
-  // };
-  //
-  // this.deleteFeed = function(data){
-  //   $http.delete('/feeds/' + data.id, data: data).then(function successCallback(resp){
-  //
-  //   }, function errorCallback(resp){
-  //
-  //   });
-  // };
-  //
-  // this.listFeeds = function(){
-  //   // List all the users feeds
-  // };
-  //
-  // this.getFeed = function(){
-  //   // Use Google Feed Service api to load the posts from that rss link
-  // };
+  this.createFeed = function(feedParams){
+    $http.post('/feeds', {params: {rss: feedParams}).then(function successCallback(resp){
+      console.log('Created rss feed ' + resp.data.rss.id);
+    }, function errorCallback(resp){
+      console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
+    });
+  };
+
+  this.updateFeed = function(feedParams){
+    $http.put('/feeds/' + SharedDataService.getUserId(), {params: {rss: feedParams}).then(function successCallback(resp){
+      console.log('Updated rss feed ' + resp.data.rss.id);
+    }, function errorCallback(resp){
+      console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
+    });
+  };
+
+  this.deleteFeed = function(feedParams){
+    $http.delete('/feeds/' + SharedDataService.getUserId(), {params: {rss: feedParams}).then(function successCallback(resp){
+      console.log('Deleted rss feed ' + resp.data.rss.id);
+    }, function errorCallback(resp){
+      console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
+    });
+  };
+
+  this.listFeeds = function(){
+    // Get and list all the users feeds from backend
+    $http.get('/user/' + SharedDataService.userId).then(function successCallback(resp){
+      this.userFeeds = resp.data.user.rss;
+      console.log('Found user ' + SharedDataService.getUserId() + ' rss feeds');
+    }, function errorCallback(resp){
+      console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
+    })
+  };
+
+  this.getFeed = function(rss_link){
+    // Use Google Feed Service api to load the posts from that rss link
+    this.currentFeed = GoogleFeedsService.loadRssFeed(rss_link);
+  };
 
 }
 
