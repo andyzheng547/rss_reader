@@ -1,8 +1,8 @@
-function FeedController($http, SharedDataService, GoogleFeedsService) {
+function FeedController($http, SharedDataService, GoogleFeedsService, userFeeds) {
   // When feed is clicked in feed.all, get the rss link attribute in the feed tab
   // Call the getFeed() function and set the currentFeed to the returned data
   this.currentFeed;
-  this.userFeeds;
+  this.userFeeds = userFeeds;
 
   this.createFeed = function(feedParams){
     $http.post('/feeds', {params: {rss: feedParams}).then(function successCallback(resp){
@@ -26,16 +26,6 @@ function FeedController($http, SharedDataService, GoogleFeedsService) {
     }, function errorCallback(resp){
       console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
     });
-  };
-
-  this.listFeeds = function(){
-    // Get and list all the users feeds from backend
-    $http.get('/user/' + SharedDataService.userId).then(function successCallback(resp){
-      this.userFeeds = resp.data.user.rss;
-      console.log('Found user ' + SharedDataService.getUserId() + ' rss feeds');
-    }, function errorCallback(resp){
-      console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
-    })
   };
 
   this.getFeed = function(rss_link){
