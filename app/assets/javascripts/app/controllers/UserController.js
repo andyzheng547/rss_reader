@@ -4,9 +4,7 @@ function UserController($http, $state, UserService) {
 
   this.loginUser = function(userParams){
     UserService.findUser(userParams).then(function(data){
-
-    }).catch(function(){
-      
+      alert(JSON.stringify(data));
     });
   };
 }

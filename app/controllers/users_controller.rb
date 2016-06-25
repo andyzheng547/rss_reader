@@ -5,10 +5,14 @@ class UsersController < ApplicationController
   def find
     @user = User.find_by(username: user_params["username"])
 
+    # Found user. Correct password
     if @user && @user.authenticate(user_params["password"])
       render json: @user, status: 200
+    # Found user but incorrect password
+    elsif @user
+      render json: {errors: {password: "password is incorrect"}}, status: 422
     else
-      render json: {errors: {user: "could not find user"}}, status: 404
+      render json: {errors: {user: "user not found"}}, status: 404
     end
   end
 
@@ -16,7 +20,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    render json: @user, status: 200
+    if @user
+      render json: @user, status: 200
+    else
+      render json: {errors: {user: "user not found"}}, status: 404
+    end
   end
 
   # POST /users
@@ -26,7 +34,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user, status: 201
     else
-      render json: {errors: @user.errors, status: 422}
+      render json: {errors: @user.errors.messages}, status: 422
     end
   end
 
@@ -34,10 +42,21 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if @user.update(user_params)
-      render json: @user, status: 200
+    # Found user and password correct
+    if @user && @user.authenticate(params[:user][:current_password])
+      if @user.update(user_params)
+        render json: @user, status: 200
+      else
+        render json: {errors: @user.errors.messages}, status: 422
+      end
+
+    # Found user but invalid password
+    elsif @user
+      render json: {errors: {password: "invalid password"}}, status: 422
+
+    # User not found
     else
-      render json: {errors: @user.errors, status: 422}
+      render json: {errors: {user: "user not found"}}, status: 404
     end
   end
 
