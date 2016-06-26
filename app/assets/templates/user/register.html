@@ -1,9 +1,21 @@
 user.register placeholder
 
-<form ng-submit="user.registerUser(userParams)">
-  <input type="text" name="username" placeholder="Username" ng-model="userParams.username">
-  <input type="text" name="password" placeholder="Password" ng-model="userParams.password">
-  <input type="submit">
+<form name="registerForm" ng-submit="user.registerUser(userParams)">
+<div class="form-group">
+    <input
+      name="username" placeholder="Username"
+      ng-model="userParams.username"
+      username
+      required="required"
+      minlength="4">
+    <span ng-messages="registerForm.username.$error" ng-if="registerForm.username.$touched">
+      <div class="has-error" ng-messages="minlength">Username must be at least 4 characters</div>
+      <div class="has-error" ng-messages="username">Username cannot contain special characters</div>
+    </span>
+</div>
+
+    <input type="text" name="password" placeholder="Password" ng-model="userParams.password" required="required">
+    <input type="submit" ng-disabled="registerForm.$invalid">
 </form>
 
 {{userParams}}

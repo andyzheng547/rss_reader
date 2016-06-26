@@ -1,12 +1,12 @@
 function UserController($http, $state, UserService, SharedDataService) {
-  this.errors;
+  this.errors = [];
 
   this.loginUser = function(userParams){
     UserService.findUser(userParams).then(function(data){
       alert(JSON.stringify(data));
 
       if (data.errors != undefined) {
-        this.errors = data.errors;
+        this.errors.push(data.errors);
       }
 
     });
@@ -16,8 +16,8 @@ function UserController($http, $state, UserService, SharedDataService) {
     UserService.createUser(userParams).then(function(data){
       alert(JSON.stringify(data));
 
-      if (data.errors != undefined) {
-        this.errors = data.errors;
+      if (data.errors) {
+        // alert(JSON.stringify(data.errors))
       }
 
     });

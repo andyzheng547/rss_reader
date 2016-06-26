@@ -1,5 +1,5 @@
 angular
-  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'templates'])
+  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'ngMessages', 'templates'])
   .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
 

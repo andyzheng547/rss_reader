@@ -37,7 +37,6 @@ angular.module('RssReaderApp')
       var route = '/users';
       var data = {user: userParams};
 
-      debugger;
       return this.makeAjaxCall(httpMethod, route, data);
     };
 
