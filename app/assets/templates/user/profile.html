@@ -2,12 +2,12 @@ user.profile placeholder
 
 <h2>Update Profile</h2>
 <form ng-submit="user.updateUser(userParams)">
-  <input type="text" name="old_username" placeholder="old username" ng-model="userParams.old_username">
   <input type="text" name="new_username" placeholder="new username" ng-model="userParams.username">
 
-  <input type="text" name="password" placeholder="old password" ng-model="userParams.old_password">
+  <input type="text" name="password" placeholder="old password" ng-model="userParams.current_password">
   <input type="text" name="password" placeholder="new password" ng-model="userParams.password">
-
 
   <input type="submit" value="Update user">
 </form>
+
+{{userParams}}

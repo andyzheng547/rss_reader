@@ -32,12 +32,14 @@ gem 'active_model_serializers'
 gem 'angularjs-rails'
 gem 'angular-ui-router-rails'
 gem 'angular-rails-templates'
+gem 'ng-rails-csrf'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   gem 'pry'
+  gem 'better_errors'
 
   # RSpec and Jasmine testing frameworks
   gem 'rspec-rails'
