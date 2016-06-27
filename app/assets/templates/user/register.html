@@ -5,7 +5,8 @@ user.register placeholder
 
   <password-input></password-input>
 
-  <submit-button></submit-button>
+  <!-- Submit Form -->
+  <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Register">
 </form>
 
 {{userParams}}

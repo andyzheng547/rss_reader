@@ -1,9 +1,12 @@
 user.login placeholder
 
 <form ng-submit="user.loginUser(userParams)">
-  <input type="text" name="username" placeholder="Username" ng-model="userParams.username">
-  <input type="text" name="password" placeholder="Password" ng-model="userParams.password">
-  <input type="submit">
+  <username-input></username-input>
+
+  <password-input></password-input>
+
+  <!-- Submit Form -->
+  <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Login">
 </form>
 
 {{userParams}}

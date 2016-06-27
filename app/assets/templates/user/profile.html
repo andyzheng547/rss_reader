@@ -7,7 +7,8 @@ user.profile placeholder
   <input type="text" name="password" placeholder="old password" ng-model="userParams.current_password">
   <input type="text" name="password" placeholder="new password" ng-model="userParams.password">
 
-  <input type="submit" value="Update user">
+  <!-- Submit Form -->
+  <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Update profile">
 </form>
 
 {{userParams}}
