@@ -4,7 +4,8 @@ function username(){
     require: 'ngModel',
     link: function(scope, element, attrs, ngModel) {
       ngModel.$validators.username = function(value){
-        return /^\w+$/g.test(value)
+        // Username can only have letters, numbers and underscores
+        return /^[\w]+$/g.test(value)
       }
     }
   }

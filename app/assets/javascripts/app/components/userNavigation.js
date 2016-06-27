@@ -1,8 +1,5 @@
 var userNavigation = {
-  bindings: {
-    // Can pull variables from component attributes
-    // someVariable: "="
-  },
+  bindings: {},
   templateUrl: 'partials/userNavigation.html'
 };
 

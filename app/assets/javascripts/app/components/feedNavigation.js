@@ -1,8 +1,5 @@
 var feedNavigation = {
-  bindings: {
-    // Can pull variables from component attributes
-    // someVariable: "="
-  },
+  bindings: {},
   templateUrl: 'partials/feedNavigation.html'
 };
 
