@@ -12,10 +12,10 @@ angular.module('RssReaderApp')
       httpMethod(route, data).then(
         // Success callback - return data with user info
         function(resp){
-          deferred.resolve(resp.data);
+          deferred.resolve(resp);
         // Error callback - return data with errors
       }, function(resp){
-          deferred.resolve(resp.data);
+          deferred.resolve(resp);
         }
       );
 

@@ -1,12 +1,20 @@
 user.login placeholder
 
-<form ng-submit="user.loginUser(userParams)">
+<form name="form" ng-submit="user.loginUser(userParams)">
   <username-input></username-input>
 
   <password-input></password-input>
 
+  <div class="server-errors" ng-repeat="(attr, attrErrors) in user.errors">
+    <span ng-repeat="error in attrErrors">
+      {{attr}} - {{error}}
+    </span>
+  </div>
+  
   <!-- Submit Form -->
   <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Login">
 </form>
+
+
 
 {{userParams}}

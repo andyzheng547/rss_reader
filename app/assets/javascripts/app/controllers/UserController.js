@@ -1,30 +1,48 @@
 function UserController($http, $state, UserService, SharedDataService) {
-  this.errors = [];
+  var self = this;
+  self.errors;
+
+  this.updateErrors = function(error){
+    this.errors = error;
+  };
 
   this.loginUser = function(userParams){
-    UserService.findUser(userParams).then(function(data){
-      alert(JSON.stringify(data));
+    UserService.findUser(userParams).then(function(resp){
+      self.updateErrors();
 
-      if (data.errors != undefined) {
-        this.errors.push(data.errors);
+      if (resp.status === 200) {
+        alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
+
+        // SharedDataService.setCurrentUser(resp.data.user);
+        // $state.go('user.profile');
+      } else {
+
+        self.errors = resp.data.errors;
+        console.log(this.errors);
       }
 
     });
   };
 
   this.registerUser = function(userParams){
-    UserService.createUser(userParams).then(function(data){
-      alert(JSON.stringify(data));
+    self.updateErrors();
 
-      if (data.errors) {
-        // alert(JSON.stringify(data.errors))
+    UserService.createUser(userParams).then(function(resp){
+      if (resp.status === 200) {
+        alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
+      } else {
+        self.errors = resp.data.errors;
+
+        console.log(this.errors);
       }
 
     });
   };
 
   this.updateUser = function(userParams){
-    UserService.updateUser(userParams).then(function(data){
+    self.updateErrors();
+
+    UserService.updateUser(userParams).then(function(resp){
       alert(JSON.stringify(data));
 
       if (data.errors != undefined) {
@@ -35,7 +53,9 @@ function UserController($http, $state, UserService, SharedDataService) {
   };
 
   this.deleteUser = function(userParams){
-    UserService.deleteUser(userParams).then(function(data){
+    self.updateErrors();
+
+    UserService.deleteUser(userParams).then(function(resp){
       alert(JSON.stringify(data));
 
       if (data.errors != undefined) {
@@ -45,6 +65,7 @@ function UserController($http, $state, UserService, SharedDataService) {
     });
   };
 
+  // this.$watch('this.')
 }
 
 angular.module('RssReaderApp').controller('UserController', UserController);

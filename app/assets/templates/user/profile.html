@@ -1,11 +1,17 @@
 user.profile placeholder
 
 <h2>Update Profile</h2>
-<form ng-submit="user.updateUser(userParams)">
+<form name="form" ng-submit="user.updateUser(userParams)">
   <input type="text" name="new_username" placeholder="new username" ng-model="userParams.username">
 
   <input type="text" name="password" placeholder="old password" ng-model="userParams.current_password">
   <input type="text" name="password" placeholder="new password" ng-model="userParams.password">
+
+  <div class="server-errors" ng-repeat="(attr, attrErrors) in user.errors">
+    <span ng-repeat="error in attrErrors">
+      {{attr}} - {{error}}
+    </span>
+  </div>
 
   <!-- Submit Form -->
   <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Update profile">

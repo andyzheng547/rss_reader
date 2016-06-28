@@ -5,6 +5,12 @@ user.register placeholder
 
   <password-input></password-input>
 
+  <div class="server-errors" ng-repeat="(attr, attrErrors) in user.errors">
+    <span ng-repeat="error in attrErrors">
+      {{attr}} - {{error}}
+    </span>
+  </div>
+
   <!-- Submit Form -->
   <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Register">
 </form>
