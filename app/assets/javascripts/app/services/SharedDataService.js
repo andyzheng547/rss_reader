@@ -1,29 +1,28 @@
 angular.module('RssReaderApp')
-  .service('SharedDataService', function() {
+  .service('SharedDataService', function($cookies) {
 
-    this.currentUser;
-    this.loggedIn = false;
+    $cookies.put('loggedIn', "false");
 
     this.getCurrentUser = function(){
-      return this.currentUser;
+      return $cookies.getObject('currentUser');
     };
 
     this.getCurrentUserFeeds = function(){
-      return this.currentUser.rss;
+      return $cookies.getObject('currentUser').rss;
     };
 
     this.getUserLoginStatus = function(){
-      return this.loggedIn;
+      return $cookies.get('loggedIn');
     };
 
-    this.setCurrentUser = function(user){
-      this.currentUser = user;
-      this.loggedIn = true;
+    this.loginUser = function(user){
+      $cookies.putObject('currentUser', user);
+      $cookies.put('loggedIn', "true");
     };
 
-    this.removeCurrentUser = function(){
-      this.currentUser = undefined;
-      this.loggedIn = false;
+    this.logoffUser = function(){
+      $cookies.remove('currentUser');
+      $cookies.put('loggedIn', "true");
     };
 
   });

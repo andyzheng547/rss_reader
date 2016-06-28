@@ -1,6 +1,7 @@
 function UserController($http, $state, UserService, SharedDataService) {
   var self = this;
   self.errors;
+  self.currentUser = SharedDataService.getCurrentUser();
 
   this.updateErrors = function(error){
     this.errors = error;
@@ -11,10 +12,10 @@ function UserController($http, $state, UserService, SharedDataService) {
       self.updateErrors();
 
       if (resp.status === 200) {
-        alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
+        // alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
 
-        // SharedDataService.setCurrentUser(resp.data.user);
-        // $state.go('user.profile');
+        SharedDataService.loginUser(resp.data.user);
+        $state.go('user.profile');
       } else {
 
         self.errors = resp.data.errors;
@@ -65,7 +66,12 @@ function UserController($http, $state, UserService, SharedDataService) {
     });
   };
 
-  // this.$watch('this.')
+  this.logoffUser = function(){
+    SharedDataService.logoffUser();
+
+    console.log('User logged out');
+    $state.go('user.login');
+  };
 }
 
 angular.module('RssReaderApp').controller('UserController', UserController);

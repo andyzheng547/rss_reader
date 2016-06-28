@@ -1,5 +1,5 @@
 angular
-  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'ngMessages', 'templates'])
+  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'ngMessages', 'ngCookies', 'templates'])
   .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
 
@@ -35,10 +35,15 @@ angular
         resolve: {}
       })
       .state('user.profile', {
-        url: '/user/profile',
+        url: '/profile',
         templateUrl: 'user/profile.html',
         controller: 'UserController as user',
-        resolve: {}
+        resolve: {},
+        onEnter: function($state, SharedDataService){
+          if (SharedDataService.getCurrentUser() === undefined) {
+            $state.go('user.login');
+          }
+        }
       })
       .state('feed', {
         url: '/feed',
