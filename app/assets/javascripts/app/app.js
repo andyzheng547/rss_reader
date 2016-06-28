@@ -32,7 +32,13 @@ angular
         url: '/logoff',
         templateUrl: 'user/logoff.html',
         controller: 'UserController as user',
-        resolve: {}
+        resolve: {
+          onEnter: function($state, SharedDataService){
+            if (SharedDataService.getCurrentUser() === undefined) {
+              $state.go('user.login');
+            }
+          }
+        }
       })
       .state('user.profile', {
         url: '/profile',
@@ -49,30 +55,60 @@ angular
         url: '/feed',
         templateUrl: 'feed.html',
         controller: 'FeedController as feed',
-        resolve: {}
+        resolve: {
+          onEnter: function($state, SharedDataService){
+            if (SharedDataService.getCurrentUser() === undefined) {
+              $state.go('user.login');
+            }
+          }
+        }
       })
       .state('feed.all', {
         url: '/all',
         templateUrl: 'feed/all.html',
         controller: 'FeedController as feed',
-        resolve: {}
+        resolve: {
+          onEnter: function($state, SharedDataService){
+            if (SharedDataService.getCurrentUser() === undefined) {
+              $state.go('user.login');
+            }
+          }
+        }
       })
       .state('feed.read', {
         url: '/read',
         templateUrl: 'feed/read.html',
         controller: 'FeedController as feed',
-        resolve: {}
+        resolve: {
+          onEnter: function($state, SharedDataService){
+            if (SharedDataService.getCurrentUser() === undefined) {
+              $state.go('user.login');
+            }
+          }
+        }
       })
       .state('feed.manage', {
         url: '/manage',
         templateUrl: 'feed/manage.html',
         controller: 'FeedController as feed',
-        resolve: {}
+        resolve: {
+          onEnter: function($state, SharedDataService){
+            if (SharedDataService.getCurrentUser() === undefined) {
+              $state.go('user.login');
+            }
+          }
+        }
       })
       .state('feed.create', {
         url: '/create',
         templateUrl: 'feed/create.html',
         controller: 'FeedController as feed',
-        resolve: {}
+        resolve: {
+          onEnter: function($state, SharedDataService){
+            if (SharedDataService.getCurrentUser() === undefined) {
+              $state.go('user.login');
+            }
+          }
+        }
       })
   });

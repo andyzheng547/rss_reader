@@ -8,7 +8,11 @@ angular.module('RssReaderApp')
     };
 
     this.getCurrentUserFeeds = function(){
-      return $cookies.getObject('currentUser').rss;
+      return $cookies.getObject('currentUser').rss_feeds;
+    };
+
+    this.getCurrentFeed = function(){
+      return $cookies.getObject('currentFeed');
     };
 
     this.getUserLoginStatus = function(){
@@ -22,7 +26,16 @@ angular.module('RssReaderApp')
 
     this.logoffUser = function(){
       $cookies.remove('currentUser');
+      $cookies.remove('currentFeed');
       $cookies.put('loggedIn', "true");
+    };
+
+    this.setCurrentFeed = function(feed){
+      $cookies.putObject('currentFeed', feed);
+    };
+
+    this.clearCurrentFeed = function(){
+      $cookies.remove('currentFeed');
     };
 
   });

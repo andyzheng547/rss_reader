@@ -40,31 +40,31 @@ function UserController($http, $state, UserService, SharedDataService) {
     });
   };
 
-  this.updateUser = function(userParams){
-    self.updateErrors();
-
-    UserService.updateUser(userParams).then(function(resp){
-      alert(JSON.stringify(data));
-
-      if (data.errors != undefined) {
-        this.errors = data.errors;
-      }
-
-    });
-  };
-
-  this.deleteUser = function(userParams){
-    self.updateErrors();
-
-    UserService.deleteUser(userParams).then(function(resp){
-      alert(JSON.stringify(data));
-
-      if (data.errors != undefined) {
-        this.errors = data.errors;
-      }
-
-    });
-  };
+  // this.updateUser = function(userParams){
+  //   self.updateErrors();
+  //
+  //   UserService.updateUser(userParams).then(function(resp){
+  //     alert(JSON.stringify(data));
+  //
+  //     if (data.errors != undefined) {
+  //       this.errors = data.errors;
+  //     }
+  //
+  //   });
+  // };
+  //
+  // this.deleteUser = function(userParams){
+  //   self.updateErrors();
+  //
+  //   UserService.deleteUser(userParams).then(function(resp){
+  //     alert(JSON.stringify(data));
+  //
+  //     if (data.errors != undefined) {
+  //       this.errors = data.errors;
+  //     }
+  //
+  //   });
+  // };
 
   this.logoffUser = function(){
     SharedDataService.logoffUser();
