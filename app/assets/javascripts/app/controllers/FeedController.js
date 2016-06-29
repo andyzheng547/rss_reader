@@ -2,7 +2,7 @@ function FeedController($http, $state, SharedDataService, GoogleFeedsService) {
   var self = this;
   // When feed is clicked in feed.all, get the rss link attribute in the feed tab
   // Call the getFeed() function and set the currentFeed to the returned data
-  self.currentFeed;
+  self.currentFeed = SharedDataService.getCurrentFeed();
   self.userFeeds = SharedDataService.getCurrentUserFeeds();
 
   // this.createFeed = function(feedParams){
@@ -31,11 +31,15 @@ function FeedController($http, $state, SharedDataService, GoogleFeedsService) {
   //
   this.getFeed = function(rss_link){
     // Use Google Feed Service api to load the posts from that rss link
-    self.currentFeed = GoogleFeedsService.loadRssFeed(rss_link);
+    GoogleFeedsService.loadRssFeed(rss_link).then(function(data){
+      // debugger;
+      alert('Got this back from Google Feeds: \n\t' + data + '\nSaving to Shared Data Service.');
+      console.log('Got this back from Google Feeds: \n\t' + data + '\nSaving to Shared Data Service.');
+      SharedDataService.setCurrentFeed(data.responseData);
+    });
   };
 
   this.goToFeed = function(feed){
-    debugger;
     self.getFeed(feed.rss_link);
     SharedDataService.setCurrentFeed(self.currentFeed);
 

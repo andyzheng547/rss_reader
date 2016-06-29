@@ -19,13 +19,9 @@ angular.module('RssReaderApp')
 
     // Takes a rss link and uses Google's Feed Service to get up to 50 posts from that rss feed
     this.loadRssFeed = function(rss_link){
-      return $http.get('https://ajax.googleapis.com/ajax/services/feed/load',{
-        params: {
-          v: 1.0,
-          q: rss_link,
-          num: 50
-        }
-      }).then(function successCallback(resp){
+      return $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURI(rss_link)
+      ).then(function successCallback(resp){
+        // debugger;
         console.log('Success: Got response from Google Feed Service. Loading feeds.');
         return resp.data;
       }, function errorCallback(resp){

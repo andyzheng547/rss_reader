@@ -4,7 +4,7 @@ function UserController($http, $state, UserService, SharedDataService) {
   self.currentUser = SharedDataService.getCurrentUser();
 
   this.updateErrors = function(error){
-    this.errors = error;
+    self.errors = error;
   };
 
   this.loginUser = function(userParams){
@@ -12,13 +12,10 @@ function UserController($http, $state, UserService, SharedDataService) {
       self.updateErrors();
 
       if (resp.status === 200) {
-        // alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
-
         SharedDataService.loginUser(resp.data.user);
         $state.go('user.profile');
       } else {
-
-        self.errors = resp.data.errors;
+        self.updateErrors(resp.data.errors);
         console.log(this.errors);
       }
 
@@ -32,8 +29,7 @@ function UserController($http, $state, UserService, SharedDataService) {
       if (resp.status === 200) {
         alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
       } else {
-        self.errors = resp.data.errors;
-
+        self.updateErrors(resp.data.errors);
         console.log(this.errors);
       }
 
