@@ -1,24 +1,27 @@
-function FeedController($http, $state, SharedDataService, GoogleFeedsService) {
+function FeedController($http, $state, $sce, SharedDataService, GoogleFeedsService) {
   var self = this;
 
-  self.currentRssUrl = SharedDataService.getCurrentFeed();
+  self.currentRssUrl = SharedDataService.getCurrentFeedUrl();
+  self.userFeeds = SharedDataService.getCurrentUserFeeds();
 
-  self.getCurrentFeed = function(){
+  self.setCurrentLink = function(link){
     debugger;
+    self.currentLink = link;
+  };
+
+  self.loadCurrentFeed = function(){
     GoogleFeedsService.loadRssFeed(self.currentRssUrl).then(function(resp){
       self.currentFeed = resp.data.responseData.feed.entries;
+      self.currentLink = $sce.trustAsResourceUrl(self.currentFeed[0].link);
     });
   };
 
-  self.alertCurrentFeed = function(){
-    debugger;
-    alert(JSON.stringify(self.currentFeed));
+  self.setCurrentLink = function(link){
+    self.currentLink = $sce.trustAsResourceUrl(link);
   };
 
-  self.userFeeds = SharedDataService.getCurrentUserFeeds();
-
   self.goToFeed = function(feed){
-    SharedDataService.setCurrentFeed(feed.rss_link);
+    SharedDataService.setCurrentFeedUrl(feed.rss_link);
 
     $state.go('feed.read');
   };
@@ -48,7 +51,17 @@ function FeedController($http, $state, SharedDataService, GoogleFeedsService) {
   // };
   //
 
-  self.getCurrentFeed();
+  self.loadCurrentFeed();
+
+
+// Might add possible pagination functions below
+  self.incrementCurrentFeedId = function(){
+    self.currentFeedId += 1;
+  }
+
+  self.decrementCurrentFeedId = function(){
+    self.currentFeedId -= 0;
+  }
 }
 
 angular.module('RssReaderApp').controller('FeedController', FeedController);

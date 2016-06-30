@@ -1,8 +1,5 @@
 angular.module('RssReaderApp')
   .service('SharedDataService', function($cookies, $q, GoogleFeedsService) {
-    var self = this;
-
-    $cookies.put('loggedIn', "false");
 
   // Handle User Sessions
     this.loginUser = function(user){
@@ -15,7 +12,7 @@ angular.module('RssReaderApp')
     this.logoffUser = function(){
       $cookies.remove('currentUser');
       $cookies.remove('currentFeed');
-      $cookies.put('loggedIn', "true");
+      $cookies.put('loggedIn', "false");
 
       console.log('User is logged off.');
     };
@@ -30,27 +27,29 @@ angular.module('RssReaderApp')
     };
 
     this.getUserLoginStatus = function(){
+      if (!$cookies.get('loggedIn')) {
+        $cookies.put('loggedIn', 'false');
+      }
+      
       return $cookies.get('loggedIn');
     };
 
   // Handles setting and clearing current feed
   // Saves a rss url in cookies, which the controller can access to make ajax call to Google Feed API
-    this.getCurrentFeed = function(){
+    this.getCurrentFeedUrl = function(){
       return $cookies.getObject('currentFeed');
     };
 
-    this.setCurrentFeed = function(feed){
+    this.setCurrentFeedUrl = function(feed){
       console.log('Setting current feed to: ' + feed);
       $cookies.putObject('currentFeed', feed);
     };
 
-    this.clearCurrentFeed = function(){
+    this.clearCurrentFeedUrl = function(){
       console.log('Removing current feed (' + self.getCurrentFeed() + ') from cookies');
       $cookies.remove('currentFeed');
 
       console.log('Done. Current feed removed from cookies');
     };
-
-    this.getFeedPosts = function(){};
 
   });

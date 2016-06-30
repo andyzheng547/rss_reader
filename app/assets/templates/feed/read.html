@@ -2,8 +2,24 @@ feed.read placeholder
 
 {{ feed.currentRssUrl }}
 
-{{ feed.currentFeed }}
+<div class="container-fluid">
 
-<div ng-click="feed.alertCurrentFeed()">
-  Show the feed
+  <div class="row">
+
+    <!-- Rss Feed -->
+    <div class="col-xs-6" ng-repeat="post in feed.currentFeed">
+      <div class="post-info">
+        <span style="color: blue" ng-click="feed.setCurrentLink(post.link)">{{ post.title }}</span> by - {{ post.author }}<br>
+        {{ post.publishedDate }}
+      </div>
+    </div>
+
+    {{ feed.currentLink }}
+
+    <!-- container  -->
+    <div class="col-xs-6">
+      <iframe ng-src="{{feed.currentLink}}" id="post-container"></iframe>
+    </div>
+  </div>
+
 </div>
