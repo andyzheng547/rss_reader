@@ -1,3 +1,9 @@
 feed.read placeholder
 
+{{ feed.currentRssUrl }}
+
 {{ feed.currentFeed }}
+
+<div ng-click="feed.alertCurrentFeed()">
+  Show the feed
+</div>
