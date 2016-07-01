@@ -4,15 +4,22 @@ angular
     $urlRouterProvider.otherwise('/');
 
     function authenticate($q, $state, $timeout, SharedDataService){
+      // Logged in
       if (SharedDataService.getUserLoginStatus() === 'true') {
         return $q.when();
+
+      // Not logged in
       } else {
+        // Redirect to user.login
+        // Without $timeout, angular will stop state transition from loading but also stops state redirect
+        // Need to run state redirect after authenticate is rejected
         $timeout(function(){
           $state.go('user.login');
-        })
-      }
+        });
 
-      return $q.reject();
+        // Reject authenication and stop the state from loading
+        return $q.reject();
+      }
     }
 
     $stateProvider
