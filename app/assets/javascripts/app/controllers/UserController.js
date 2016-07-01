@@ -27,11 +27,13 @@ function UserController($http, $state, UserService, SharedDataService) {
     self.updateErrors();
 
     UserService.createUser(userParams).then(function(resp){
-      if (resp.status === 200) {
-        console.log("Status 200. Created user account. Logging in now.");
+      if (resp.status === 201) {
+        debugger;
+        console.log("Status 201. Created user account. Logging in now.");
         SharedDataService.loginUser(resp.data.user);
         $state.go('user.profile');
       } else {
+        debugger;
         self.updateErrors(resp.data.errors);
         console.log(this.errors);
       }
