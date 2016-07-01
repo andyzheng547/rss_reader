@@ -3,6 +3,18 @@ angular
   .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
 
+    function authenticate($q, $state, $timeout, SharedDataService){
+      if (SharedDataService.getUserLoginStatus() === 'true') {
+        return $q.when();
+      } else {
+        $timeout(function(){
+          $state.go('user.login');
+        })
+      }
+
+      return $q.reject();
+    }
+
     $stateProvider
       .state('home', {
         url: '/',
@@ -32,83 +44,42 @@ angular
         url: '/logoff',
         templateUrl: 'user/logoff.html',
         controller: 'UserController as user',
-        resolve: {
-          onEnter: function($state, SharedDataService){
-            if (SharedDataService.getCurrentUser() === undefined) {
-              $state.go('user.login');
-            }
-          }
-        }
+        resolve: {}
       })
       .state('user.profile', {
         url: '/profile',
         templateUrl: 'user/profile.html',
         controller: 'UserController as user',
-        resolve: {},
-        onEnter: function($state, SharedDataService){
-          if (SharedDataService.getCurrentUser() === undefined) {
-            $state.go('user.login');
-          }
-        }
+        resolve: {authenticate: authenticate}
       })
       .state('feed', {
         url: '/feed',
         templateUrl: 'feed.html',
         controller: 'FeedController as feed',
-        resolve: {
-          onEnter: function($state, SharedDataService){
-            if (SharedDataService.getCurrentUser() === undefined) {
-              $state.go('user.login');
-            }
-          }
-        }
+        resolve: {authenticate: authenticate}
       })
       .state('feed.all', {
         url: '/all',
         templateUrl: 'feed/all.html',
         controller: 'FeedController as feed',
-        resolve: {
-          onEnter: function($state, SharedDataService){
-            if (SharedDataService.getCurrentUser() === undefined) {
-              $state.go('user.login');
-            }
-          }
-        }
+        resolve: {authenticate: authenticate}
       })
       .state('feed.read', {
         url: '/read',
         templateUrl: 'feed/read.html',
         controller: 'FeedController as feed',
-        resolve: {
-          onEnter: function($state, SharedDataService){
-            if (SharedDataService.getCurrentUser() === undefined) {
-              $state.go('user.login');
-            }
-          }
-        }
+        resolve: {authenticate: authenticate}
       })
       .state('feed.manage', {
         url: '/manage',
         templateUrl: 'feed/manage.html',
         controller: 'FeedController as feed',
-        resolve: {
-          onEnter: function($state, SharedDataService){
-            if (SharedDataService.getCurrentUser() === undefined) {
-              $state.go('user.login');
-            }
-          }
-        }
+        resolve: {authenticate: authenticate}
       })
       .state('feed.create', {
         url: '/create',
         templateUrl: 'feed/create.html',
         controller: 'FeedController as feed',
-        resolve: {
-          onEnter: function($state, SharedDataService){
-            if (SharedDataService.getCurrentUser() === undefined) {
-              $state.go('user.login');
-            }
-          }
-        }
+        resolve: {authenticate: authenticate}
       })
   });

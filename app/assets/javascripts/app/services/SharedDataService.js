@@ -4,7 +4,7 @@ angular.module('RssReaderApp')
   // Handle User Sessions
     this.loginUser = function(user){
       $cookies.putObject('currentUser', user);
-      $cookies.put('loggedIn', "true");
+      $cookies.put('loggedIn', true);
 
       console.log('User is logged in.');
     };
@@ -12,7 +12,7 @@ angular.module('RssReaderApp')
     this.logoffUser = function(){
       $cookies.remove('currentUser');
       $cookies.remove('currentFeed');
-      $cookies.put('loggedIn', "false");
+      $cookies.put('loggedIn', false);
 
       console.log('User is logged off.');
     };
@@ -28,9 +28,9 @@ angular.module('RssReaderApp')
 
     this.getUserLoginStatus = function(){
       if (!$cookies.get('loggedIn')) {
-        $cookies.put('loggedIn', 'false');
+        $cookies.put('loggedIn', false);
       }
-      
+
       return $cookies.get('loggedIn');
     };
 

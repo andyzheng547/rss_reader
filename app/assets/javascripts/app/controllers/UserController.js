@@ -12,6 +12,7 @@ function UserController($http, $state, UserService, SharedDataService) {
       self.updateErrors();
 
       if (resp.status === 200) {
+        console.log('Found user account. Logging in now.');
         SharedDataService.loginUser(resp.data.user);
         $state.go('user.profile');
       } else {
@@ -27,7 +28,9 @@ function UserController($http, $state, UserService, SharedDataService) {
 
     UserService.createUser(userParams).then(function(resp){
       if (resp.status === 200) {
-        alert("Status 200\nServer response: p" + JSON.stringify(resp.data));
+        console.log("Status 200. Created user account. Logging in now.");
+        SharedDataService.loginUser(resp.data.user);
+        $state.go('user.profile');
       } else {
         self.updateErrors(resp.data.errors);
         console.log(this.errors);
