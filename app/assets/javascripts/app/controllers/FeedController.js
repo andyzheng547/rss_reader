@@ -10,10 +10,13 @@ function FeedController($http, $state, $sce, SharedDataService, GoogleFeedsServi
   };
 
   self.loadCurrentFeed = function(){
-    GoogleFeedsService.loadRssFeed(self.currentRssUrl).then(function(resp){
-      self.currentFeed = resp.data.responseData.feed.entries;
-      self.currentLink = $sce.trustAsResourceUrl(self.currentFeed[0].link);
-    });
+    debugger;
+    if ($state.current.name === "feed.read"){
+      GoogleFeedsService.loadRssFeed(self.currentRssUrl).then(function(resp){
+        self.currentFeed = resp.data.responseData.feed.entries;
+        self.currentLink = $sce.trustAsResourceUrl(self.currentFeed[0].link);
+      });
+    }
   };
 
   self.setCurrentLink = function(link){
@@ -51,17 +54,18 @@ function FeedController($http, $state, $sce, SharedDataService, GoogleFeedsServi
   // };
   //
 
+
+  self.discoverFeeds = function(query){
+    GoogleFeedsService.findRssFeed(query).then(function(resp){
+      // debugger;
+      self.googleRssResults = resp.data.responseData.entries;
+      console.log('You got this back from Google: \n\t' + JSON.stringify(resp));
+      alert('You got this back from Google: \n\t' + JSON.stringify(resp))
+    });
+  };
+
   self.loadCurrentFeed();
 
-
-// Might add possible pagination functions below
-  self.incrementCurrentFeedId = function(){
-    self.currentFeedId += 1;
-  }
-
-  self.decrementCurrentFeedId = function(){
-    self.currentFeedId -= 0;
-  }
 }
 
 angular.module('RssReaderApp').controller('FeedController', FeedController);

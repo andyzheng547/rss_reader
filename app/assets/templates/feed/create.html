@@ -1,1 +1,9 @@
 feed.create placeholder
+
+<h1>Google Feed Service</h1>
+<form ng-submit="feed.discoverFeeds(query)">
+  <input type="text" name="query" ng-model="query">
+  <input type="submit" value="Discover RSS Feeds">
+</form>
+
+{{ feed.googleRssResults }}
