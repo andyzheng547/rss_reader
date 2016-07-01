@@ -41,9 +41,9 @@ angular.module('RssReaderApp')
     };
 
     // PUT user in backend
-    this.updateUser = function(userParams, user_id){
+    this.updateUser = function(user_id, userParams){
       var httpMethod = $http.put;
-      var route = '/users/' + userId;
+      var route = '/users/' + user_id;
       var data = {user: userParams};
 
       return this.makeAjaxCall(httpMethod, route, data);

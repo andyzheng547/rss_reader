@@ -10,9 +10,9 @@ class UsersController < ApplicationController
       render json: @user, status: 200
     # Found user but incorrect password
     elsif @user
-      render json: {errors: {password: "password is incorrect"}}, status: 422
+      render json: {errors: {password: ["password is incorrect"]}}, status: 422
     else
-      render json: {errors: {user: "user not found"}}, status: 404
+      render json: {errors: {user: ["user not found"]}}, status: 404
     end
   end
 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if @user
       render json: @user, status: 200
     else
-      render json: {errors: {user: "user not found"}}, status: 404
+      render json: {errors: {user: ["user not found"]}}, status: 404
     end
   end
 
@@ -52,11 +52,11 @@ class UsersController < ApplicationController
 
     # Found user but invalid password
     elsif @user
-      render json: {errors: {password: "invalid password"}}, status: 422
+      render json: {errors: {password: ["invalid password"]}}, status: 422
 
     # User not found
     else
-      render json: {errors: {user: "user not found"}}, status: 404
+      render json: {errors: {user: ["user not found"]}}, status: 404
     end
   end
 

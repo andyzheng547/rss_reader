@@ -17,6 +17,12 @@ angular.module('RssReaderApp')
       console.log('User is logged off.');
     };
 
+    this.updateUser = function(user){
+      $cookies.putObject('currentUser', user);
+
+      console.log('Updated user.');
+    };
+
   // Get User Info from Cookies
     this.getCurrentUser = function(){
       return $cookies.getObject('currentUser');

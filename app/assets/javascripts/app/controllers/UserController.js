@@ -19,7 +19,6 @@ function UserController($http, $state, UserService, SharedDataService) {
         self.updateErrors(resp.data.errors);
         console.log(this.errors);
       }
-
     });
   };
 
@@ -28,31 +27,35 @@ function UserController($http, $state, UserService, SharedDataService) {
 
     UserService.createUser(userParams).then(function(resp){
       if (resp.status === 201) {
-        debugger;
         console.log("Status 201. Created user account. Logging in now.");
         SharedDataService.loginUser(resp.data.user);
         $state.go('user.profile');
       } else {
-        debugger;
         self.updateErrors(resp.data.errors);
         console.log(this.errors);
       }
-
     });
   };
 
-  // this.updateUser = function(userParams){
-  //   self.updateErrors();
-  //
-  //   UserService.updateUser(userParams).then(function(resp){
-  //     alert(JSON.stringify(data));
-  //
-  //     if (data.errors != undefined) {
-  //       this.errors = data.errors;
-  //     }
-  //
-  //   });
-  // };
+  this.updateUser = function(userParams){
+    self.updateErrors();
+    var user_id = SharedDataService.getCurrentUser().id;
+
+    UserService.updateUser(user_id, userParams).then(function(resp){
+      if (resp.status === 200) {
+        console.log("Status 200. Updated user in database.");
+
+        // Update currentUser in cookies and then reset self.currentUser to reflect user changes
+        SharedDataService.updateUser(resp.data.user);
+        self.currentUser = SharedDataService.getCurrentUser();
+
+        $state.go('user.profile');
+      } else {
+        self.updateErrors(resp.data.errors);
+        console.log(this.errors);
+      }
+    });
+  };
   //
   // this.deleteUser = function(userParams){
   //   self.updateErrors();
