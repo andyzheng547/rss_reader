@@ -56,19 +56,19 @@ function UserController($http, $state, UserService, SharedDataService) {
       }
     });
   };
-  //
-  // this.deleteUser = function(userParams){
-  //   self.updateErrors();
-  //
-  //   UserService.deleteUser(userParams).then(function(resp){
-  //     alert(JSON.stringify(data));
-  //
-  //     if (data.errors != undefined) {
-  //       this.errors = data.errors;
-  //     }
-  //
-  //   });
-  // };
+
+  this.deleteUser = function(userParams){
+    self.updateErrors();
+
+    UserService.deleteUser(userParams).then(function(resp){
+      console.log('Deleted user. Clearing user from cookies.')
+
+      SharedDataService.logoffUser();
+      self.currentUser = SharedDataService.getCurrentUser();
+
+      $state.go('user.login');
+    });
+  };
 
   this.logoffUser = function(){
     SharedDataService.logoffUser();
