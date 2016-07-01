@@ -52,10 +52,9 @@ angular.module('RssReaderApp')
     // DELETE user in backend
     this.deleteUser = function(user_id){
       var httpMethod = $http.delete;
-      var route = '/users/' + userId;
-      var data = {user: userParams};
+      var route = '/users/' + user_id;
 
-      return this.makeAjaxCall(httpMethod, route, data);
+      return this.makeAjaxCall(httpMethod, route);
     };
 
 });

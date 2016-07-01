@@ -57,11 +57,12 @@ function UserController($http, $state, UserService, SharedDataService) {
     });
   };
 
-  this.deleteUser = function(userParams){
+  this.deleteUser = function(){
     self.updateErrors();
+    var user_id = SharedDataService.getCurrentUser().id;
 
-    UserService.deleteUser(userParams).then(function(resp){
-      console.log('Deleted user. Clearing user from cookies.')
+    UserService.deleteUser(user_id).then(function(resp){
+      console.log('Successfully deleted user. Clearing user from cookies.')
 
       SharedDataService.logoffUser();
       self.currentUser = SharedDataService.getCurrentUser();
