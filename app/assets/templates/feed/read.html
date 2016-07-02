@@ -9,8 +9,11 @@ feed.read placeholder
     <!-- Rss Feed -->
     <div class="col-xs-6" ng-repeat="post in feed.currentFeed">
       <div class="post-info">
-        <span style="color: blue" ng-click="feed.setCurrentLink(post.link)">{{ post.title }}</span> by - {{ post.author }}<br>
-        {{ post.publishedDate }}
+        <div class="post-title" style="color: blue" ng-click="feed.setCurrentLink(post.link)" ng-bind-html="post.title"></div>
+        <div class="post-author" ng-if="post.author  != '' ">
+          by <span ng-bind-html="post.author"></span>
+        </div>
+        <div ng-bind-html="post.publishedDate"></div>
       </div>
     </div>
 

@@ -4,5 +4,5 @@ feed.all placeholder
 
 
 <div class="user-feeds-display" ng-repeat="rssFeed in feed.userFeeds">
-  <a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}">{{rssFeed.title}} goes to {{rssFeed.id}}</a>
+  <a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}" ng-bind-html="rssFeed.title"></a>
 </div>

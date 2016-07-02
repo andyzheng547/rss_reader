@@ -77,12 +77,6 @@ angular
         controller: 'FeedController as feed',
         resolve: {authenticate: authenticate}
       })
-      .state('feed.manage', {
-        url: '/manage',
-        templateUrl: 'feed/manage.html',
-        controller: 'FeedController as feed',
-        resolve: {authenticate: authenticate}
-      })
       .state('feed.create', {
         url: '/create',
         templateUrl: 'feed/create.html',
