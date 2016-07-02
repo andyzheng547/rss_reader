@@ -1,4 +1,4 @@
-function FeedController($http, $state, $sce, FeedService, SharedDataService, GoogleFeedsService) {
+function FeedController($http, $state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
   self.userFeeds = SharedDataService.getCurrentUserFeeds();
@@ -61,6 +61,11 @@ function FeedController($http, $state, $sce, FeedService, SharedDataService, Goo
     feedParams.user_id = SharedDataService.getCurrentUser().id;
     FeedService.createFeed(feedParams).then(function(resp){
       if (resp.status === 201){
+        // Update currentUser cookie with updated rss feeds
+        UserService.findUserById(feedParams.user_id).then(function(resp){
+          SharedDataService.updateUser(resp.data.user);
+        });
+
         console.log('Status 201. Created rss feed. Redirecting to feed display.');
         $state.go('feed.all');
       } else {

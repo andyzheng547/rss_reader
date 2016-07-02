@@ -22,13 +22,23 @@ angular.module('RssReaderApp')
       return deferred.promise;
     }
 
-    // GET user from backend
+    // GET user from backend with username and password
+    // For login purposes
     this.findUser = function(userParams){
       var httpMethod = $http.get;
       var route = '/users/find';
       var data = {params: {user: userParams}};
 
       return this.makeAjaxCall(httpMethod, route, data);
+    };
+
+    // GET user from backend with user id
+    // For updating currentUser cookie when user is already logged in
+    this.findUserById = function(user_id){
+      var httpMethod = $http.get;
+      var route = '/users/' + user_id;
+
+      return this.makeAjaxCall(httpMethod, route);
     };
 
     // POST user in backend
