@@ -54,18 +54,20 @@ function FeedController($http, $state, $sce, SharedDataService, GoogleFeedsServi
     GoogleFeedsService.findRssFeed(query).then(function(resp){
       self.googleRssResults = resp.data.responseData.entries;
       console.log('You got this back from Google: \n\t' + JSON.stringify(resp));
-      alert('You got this back from Google: \n\t' + JSON.stringify(resp))
     });
   };
 
-  // this.createFeed = function(feedParams){
-  //   $http.post('/feeds', {params: {rss: feedParams}}).then(function successCallback(resp){
-  //     console.log('Created rss feed ' + resp.data.rss.id);
-  //   }, function errorCallback(resp){
-  //     console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
-  //   });
-  // };
-  //
+  self.createFeed = function(feedParams){
+    debugger;
+    feedParams.user_id = SharedDataService.getCurrentUser().id;
+    debugger;
+    // $http.post('/feeds', {params: {rss: feedParams}}).then(function successCallback(resp){
+    //   console.log('Created rss feed ' + resp.data.rss.id);
+    // }, function errorCallback(resp){
+    //   console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
+    // });
+  };
+
   // this.updateFeed = function(feedParams){
   //   $http.put('/feeds/' + SharedDataService.getUserId(), {params: {rss: feedParams}}).then(function successCallback(resp){
   //     console.log('Updated rss feed ' + resp.data.rss.id);

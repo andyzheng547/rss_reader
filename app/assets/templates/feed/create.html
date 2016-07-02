@@ -6,4 +6,39 @@ feed.create placeholder
   <input type="submit" value="Discover RSS Feeds">
 </form>
 
-{{ feed.googleRssResults }}
+<h3>Results for {{query}}</h3>
+<div class="google-feed-search-results container" ng-repeat="result in feed.googleRssResults track by $index">
+  <div class="feed-result row">
+    <!-- Display Result -->
+    <div class="col-xs-9">
+      <!-- Result Title -->
+      <h5 class="result-title"  ng-bind-html="result.title"></h5>
+      <!-- Result Description -->
+      <div class="result-description">
+        <strong>Description: </strong>
+        <span ng-bind-html="result.contentSnippet"></span>
+      </div>
+      <!-- Result Rss Link -->
+      <div class="result-rss-link">
+        <strong>RSS Feed: </strong>
+        <span ng-bind-html="result.url"></span>
+      </div>
+      <!-- Result Source -->
+      <div class="result-source">
+        <strong>Source: </strong>
+        <span ng-bind-html="result.link"></span>
+      </div>
+    </div>
+
+    <!-- Create Rss Feed Form -->
+    <!-- <form class="rss-feed-form" ng-submit="feed.createFeed(params)">
+      <input type="hidden" name="name" value="{{result.title}}" ng-model="params.title">
+      <input type="hidden" name="name" value="{{result.contentSnippet}}" ng-model="params.description">
+      <input type="hidden" name="name" value="{{result.url}}" ng-model="params.rss_link">
+      <input type="hidden" name="name" value="{{result.link}}" ng-model="params.link">
+
+      <input type="submit" value="Add this rss feed">
+    </form> -->
+  </div> <!-- End of Feed Result div -->
+  <hr>
+</div> <!-- End of Search Results div -->
