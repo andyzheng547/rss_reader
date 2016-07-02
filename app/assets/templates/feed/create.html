@@ -7,7 +7,7 @@ feed.create placeholder
 </form>
 
 <h3>Results for {{query}}</h3>
-<div class="google-feed-search-results container" ng-repeat="result in feed.googleRssResults track by $index">
+<div class="google-feed-search-results container" ng-repeat="result in feed.googleRssResults" ng-init="searchResults = {}">
   <div class="feed-result row">
     <!-- Display Result -->
     <div class="col-xs-9">
@@ -31,14 +31,20 @@ feed.create placeholder
     </div>
 
     <!-- Create Rss Feed Form -->
-    <!-- <form class="rss-feed-form" ng-submit="feed.createFeed(params)">
-      <input type="hidden" name="name" value="{{result.title}}" ng-model="params.title">
-      <input type="hidden" name="name" value="{{result.contentSnippet}}" ng-model="params.description">
-      <input type="hidden" name="name" value="{{result.url}}" ng-model="params.rss_link">
-      <input type="hidden" name="name" value="{{result.link}}" ng-model="params.link">
+    <span ng-init="searchResults.$index = {}">
+      <span ng-init="
+        searchResults.$index.title = result.title;
+        searchResults.$index.description = result.contentSnippet;
+        searchResults.$index.rss_link = result.url;
+        searchResults.$index.link = result.link">
+      </span>
+    </span>
 
+    <form class="rss-feed-form" ng-submit="feed.createFeed(searchResults.$index)">
       <input type="submit" value="Add this rss feed">
-    </form> -->
+    </form>
+
+
   </div> <!-- End of Feed Result div -->
   <hr>
 </div> <!-- End of Search Results div -->

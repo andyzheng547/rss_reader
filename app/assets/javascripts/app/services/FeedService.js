@@ -21,8 +21,21 @@ angular.module('RssReaderApp').service('FeedService', function($http) {
     return deferred.promise;
   }
 
-  // this.createFeed = function(feedParams){
-  //   
-  // };
+  // POST rss feed in backend
+  this.createFeed = function(feedParams){
+    var httpMethod = $http.post;
+    var route = '/rss_feeds';
+    var data = {rss: feedParams};
+
+    return this.makeAjaxCall(httpMethod, route, data);
+  };
+
+  // DELETE rss feed in backend
+  this.deleteFeed = function(feed_id){
+    var httpMethod = $http.delete;
+    var route = '/rss_feeds/' + feed_id;
+
+    return this.makeAjaxCall(httpMethod, route);
+  };
 
 });

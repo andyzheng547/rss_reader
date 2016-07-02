@@ -1,4 +1,4 @@
-function FeedController($http, $state, $sce, SharedDataService, GoogleFeedsService) {
+function FeedController($http, $state, $sce, FeedService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
   self.userFeeds = SharedDataService.getCurrentUserFeeds();
@@ -58,14 +58,16 @@ function FeedController($http, $state, $sce, SharedDataService, GoogleFeedsServi
   };
 
   self.createFeed = function(feedParams){
-    debugger;
     feedParams.user_id = SharedDataService.getCurrentUser().id;
     debugger;
-    // $http.post('/feeds', {params: {rss: feedParams}}).then(function successCallback(resp){
-    //   console.log('Created rss feed ' + resp.data.rss.id);
-    // }, function errorCallback(resp){
-    //   console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
-    // });
+    FeedService.createFeed(feedParams).then(function(resp){
+      if (resp.status === 201){
+        console.log('Status 201. Created rss feed. Redirecting to feed display.');
+        $state.go('feed.all');
+      } else {
+        console.log('Had trouble saving your rss feed to database.');
+      }
+    });
   };
 
   // this.updateFeed = function(feedParams){
