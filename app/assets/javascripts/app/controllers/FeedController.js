@@ -1,7 +1,7 @@
 function FeedController($http, $state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
-  self.userFeeds = SharedDataService.getCurrentUserFeeds();
+  // self.userFeeds = SharedDataService.getCurrentUserFeeds();
 
   // Add onload listener to iframe to check for same origin error
   self.attachIframeListener = function(){
@@ -64,32 +64,33 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
         // Update currentUser cookie with updated rss feeds
         UserService.findUserById(feedParams.user_id).then(function(resp){
           SharedDataService.updateUser(resp.data.user);
+          self.userFeeds = SharedDataService.getCurrentUserFeeds();
+          console.log('Status 201. Created rss feed. Redirecting to feed display.');
+          $state.go('feed.all', {}, {reload: true});
         });
-
-        console.log('Status 201. Created rss feed. Redirecting to feed display.');
-        $state.go('feed.all');
       } else {
         console.log('Had trouble saving your rss feed to database.');
       }
     });
   };
 
-  // this.updateFeed = function(feedParams){
-  //   $http.put('/feeds/' + SharedDataService.getUserId(), {params: {rss: feedParams}}).then(function successCallback(resp){
-  //     console.log('Updated rss feed ' + resp.data.rss.id);
-  //   }, function errorCallback(resp){
-  //     console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
-  //   });
-  // };
-  //
-  // this.deleteFeed = function(feedParams){
-  //   $http.delete('/feeds/' + SharedDataService.getUserId(), {params: {rss: feedParams}}).then(function successCallback(resp){
-  //     console.log('Deleted rss feed ' + resp.data.rss.id);
-  //   }, function errorCallback(resp){
-  //     console.log('Status' + resp.status + '\nServer responded with: ' + JSON.stringify(resp.data.errors));
-  //   });
-  // };
-  //
+  this.deleteFeed = function(feed_id){
+    // debugger;
+    FeedService.deleteFeed(feed_id).then(function(resp){
+      var user_id = SharedDataService.getCurrentUser().id;
+      // Update currentUser cookie with updated rss feeds
+      UserService.findUserById(user_id).then(function(resp){
+        SharedDataService.updateUser(resp.data.user);
+        self.userFeeds = SharedDataService.getCurrentUserFeeds();
+        console.log('Success removing rss feed. You will no longer see thoses posts.');
+        $state.go('feed.all', {}, {reload: true});
+      });
+    });
+  };
+
+  if ($state.current.name === "feed.all") {
+    self.userFeeds = SharedDataService.getCurrentUserFeeds();
+  }
 
   if ($state.current.name === "feed.read"){
     self.currentRssUrl = SharedDataService.getCurrentFeedUrl();
