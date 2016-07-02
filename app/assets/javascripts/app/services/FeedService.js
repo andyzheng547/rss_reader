@@ -1,4 +1,4 @@
-angular.module('RssReaderApp').service('FeedService', function($http) {
+angular.module('RssReaderApp').service('FeedService', function($http, $q) {
 
   // Takes the method to be called from $http and passes in the route and configurations
   // Will return the deferred promise containing either the user info or errors

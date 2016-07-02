@@ -59,7 +59,6 @@ function FeedController($http, $state, $sce, FeedService, SharedDataService, Goo
 
   self.createFeed = function(feedParams){
     feedParams.user_id = SharedDataService.getCurrentUser().id;
-    debugger;
     FeedService.createFeed(feedParams).then(function(resp){
       if (resp.status === 201){
         console.log('Status 201. Created rss feed. Redirecting to feed display.');

@@ -7,7 +7,7 @@ class RssFeedsController < ApplicationController
   end
 
   def create
-    @rss = RssFeed.new(user_params)
+    @rss = RssFeed.new(rss_params)
 
     if @rss.save
       render json: @rss, status: 201
