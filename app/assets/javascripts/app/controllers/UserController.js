@@ -3,6 +3,11 @@ function UserController($http, $state, UserService, SharedDataService) {
   self.errors;
   self.currentUser = SharedDataService.getCurrentUser();
 
+  self.loggedIn = function(){
+    var loggedIn = SharedDataService.getUserLoginStatus();
+    return loggedIn === 'true' ? true : false;
+  };
+
   this.updateErrors = function(error){
     self.errors = error;
   };

@@ -1,1 +1,28 @@
+<div class="home-nav">
+  <h4>Home Navigation</h4>
+  <ul class="navigation">
+    <span ng-show="!home.loggedIn()">
+      <li ui-sref-active="active">
+        <a ui-sref="user.login">Login</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="user.register">Register</a>
+      </li>
+    </span>
+
+    <span ng-show="home.loggedIn()">
+      <li ui-sref-active="active">
+        <a ui-sref="user.logoff">Logoff</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="user.profile">Profile</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="feed.all">All Feeds</a>
+      </li>
+    </span>
+  </ul>
+</div>
+
+
 home placeholder

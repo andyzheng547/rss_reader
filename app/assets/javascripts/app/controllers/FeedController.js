@@ -1,8 +1,6 @@
 function FeedController($http, $state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
-  // self.userFeeds = SharedDataService.getCurrentUserFeeds();
-
   // Add onload listener to iframe to check for same origin error
   self.attachIframeListener = function(){
     var iframe = document.getElementById('iframe');

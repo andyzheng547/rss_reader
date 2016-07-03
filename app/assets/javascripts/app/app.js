@@ -29,6 +29,12 @@ angular
         controller: 'HomeController as home',
         resolve: {}
       })
+      .state('about', {
+        url: '/about',
+        templateUrl: 'about.html',
+        controller: 'HomeController as home',
+        resolve: {}
+      })
       .state('user', {
         url: '/user',
         templateUrl: 'user.html',
@@ -83,4 +89,10 @@ angular
         controller: 'FeedController as feed',
         resolve: {authenticate: authenticate}
       })
+  })
+  .run(function($rootScope, SharedDataService){
+    $rootScope.loggedIn = function(){
+      var loggedIn = SharedDataService.getUserLoginStatus();
+      return loggedIn === 'true' ? true : false;
+    };
   });

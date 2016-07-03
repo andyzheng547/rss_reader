@@ -1,16 +1,24 @@
 <div class="user-nav">
   <h4>User Navigation</h4>
   <ul class="navigation">
+    <span ng-show="!user.loggedIn()">
+      <li ui-sref-active="active">
+        <a ui-sref="user.login">Login</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="user.register">Register</a>
+      </li>
+    </span>
 
-    <!-- Include ng-ifs to check if user is logged in -->
+    <span ng-show="user.loggedIn()">
+      <li ui-sref-active="active">
+        <a ui-sref="user.logoff">Log Off</a>
+      </li>
+    </span>
+
     <li ui-sref-active="active">
-      <a ui-sref="user.login">Login</a>
+      <a ui-sref="feed.all">Feed</a>
     </li>
-    <li ui-sref-active="active">
-      <a ui-sref="user.register">Register</a>
-    </li>
-    <li ui-sref-active="active">
-      <a ui-sref="user.logoff">Log Off</a>
-    </li>
+
   </ul>
 </div>
