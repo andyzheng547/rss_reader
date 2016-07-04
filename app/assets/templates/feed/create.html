@@ -1,5 +1,6 @@
 feed.create placeholder
 
+<!-- Create Rss Feed using input -->
 <h1>Add your own rss feed</h1>
 <form name="form" class="create-feed-form" ng-submit="feed.createFeed(feedParams)">
   <title-input></title-input>
@@ -10,12 +11,14 @@ feed.create placeholder
   <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Create Feed">
 </form>
 
+<!-- Google Feed Service Form - Find RSS Feeds based on query -->
 <h1>or let Google Feed Service find one for you</h1>
 <form ng-submit="feed.discoverFeeds(query)">
   <input type="text" name="query" ng-model="query">
   <input type="submit" value="Discover RSS Feeds">
 </form>
 
+<!-- Google Feed Search Results -->
 <h3>Results for {{query}}</h3>
 <div class="google-feed-search-results container" ng-repeat="result in feed.googleRssResults" ng-init="searchResults = {}">
   <div class="feed-result row">
@@ -40,7 +43,6 @@ feed.create placeholder
       </div>
     </div>
 
-    <!-- Create Rss Feed Form -->
     <span ng-init="searchResults.$index = {}">
       <span ng-init="
         searchResults.$index.title = result.title;
@@ -50,6 +52,7 @@ feed.create placeholder
       </span>
     </span>
 
+    <!-- Create Rss Feed from Result-->
     <form class="rss-feed-form" ng-submit="feed.createFeed(searchResults.$index)">
       <input type="submit" value="Add this rss feed">
     </form>

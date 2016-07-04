@@ -71,11 +71,13 @@ user.profile placeholder
 <h1>User info</h1>
 {{ user.currentUser }}
 
-
+<!-- Delete User -->
 <h1>Delete user form</h1>
 <div class="delete-user-div" ng-init="showDeleteButton = false">
+  <!-- Toggles delete user div -->
   <button type="button" name="deleteUser" ng-click="showDeleteButton = true">Delete account</button>
 
+  <!-- Delete user confirmation -->
   <div class="delete-user-confirmation" ng-show="showDeleteButton">
     <h2>Are you really sure?</h2>
     <button type="button" name="no-delete" ng-click="showDeleteButton = false">No</button>

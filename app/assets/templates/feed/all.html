@@ -3,10 +3,13 @@ feed.all placeholder
 <h1>user feeds</h1>
 
 <div class="user-feeds-display" ng-repeat="rssFeed in feed.userFeeds" ng-init="showDeleteForm = {}">
+  <!-- Click to view Rss Feed -->
   <a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}" ng-bind-html="rssFeed.title"></a>
 
+  <!-- Toggles Delete Rss Feed div  -->
   <button class="delete-feed-toggle" type="button" ng-init="showDeleteForm.$index = false" ng-click="showDeleteForm.$index = !showDeleteForm.$index">Delete this feed?</button>
 
+  <!-- Delete Rss Feed Confirmation -->
   <div class="delete-feed-confirmation" ng-show="showDeleteForm.$index">
     <button type="button" ng-click="showDeleteForm.$index = false">No</button>
     <button type="button" ng-click="feed.deleteFeed(rssFeed.id)">Yes</button>
