@@ -1,6 +1,16 @@
 feed.create placeholder
 
-<h1>Google Feed Service</h1>
+<h1>Add your own rss feed</h1>
+<form name="form" class="create-feed-form" ng-submit="feed.createFeed(feedParams)">
+  <title-input></title-input>
+  <description-input></description-input>
+  <rss-link-input></rss-link-input>
+  <link-input></link-input>
+
+  <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Create Feed">
+</form>
+
+<h1>or let Google Feed Service find one for you</h1>
 <form ng-submit="feed.discoverFeeds(query)">
   <input type="text" name="query" ng-model="query">
   <input type="submit" value="Discover RSS Feeds">
