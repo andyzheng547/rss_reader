@@ -1,4 +1,4 @@
-function FeedController($http, $state, $sce, $location, $anchorScroll, FeedService, UserService, SharedDataService, GoogleFeedsService) {
+function FeedController($http, $state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
   // Add onload listener to iframe to check for same origin error
