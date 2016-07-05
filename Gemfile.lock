@@ -42,6 +42,7 @@ GEM
       railties (>= 4.2, < 6)
       sprockets (~> 3.0)
       tilt
+    angular-ui-bootstrap-rails (0.14.3)
     angular-ui-router-rails (0.2.15)
     angularjs-rails (1.5.6)
     arel (6.0.3)
@@ -202,6 +203,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   angular-rails-templates
+  angular-ui-bootstrap-rails
   angular-ui-router-rails
   angularjs-rails
   bcrypt (~> 3.1.7)

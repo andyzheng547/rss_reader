@@ -72,9 +72,9 @@
     <div class="row">
       <!-- Delete User -->
       <h2>Delete user form</h2>
-      <div class="delete-user-div" ng-init="showDeleteButton = false">
+      <div class="delete-user-div">
         <!-- Toggles delete user div -->
-        <button type="button" name="deleteUser" ng-click="showDeleteButton = !showDeleteButton">Delete account</button>
+        <button type="button" name="deleteUser"  ng-init="showDeleteButton = false" ng-click="showDeleteButton = !showDeleteButton">Delete account</button>
 
         <!-- Delete user confirmation -->
         <div class="delete-user-confirmation" ng-show="showDeleteButton">
