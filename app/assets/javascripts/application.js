@@ -21,6 +21,7 @@
 //= require angular-ui-router
 //= require angular-rails-templates
 //= require ng-rails-csrf
+//= require angular-ui-bootstrap-tpls
 //= require_tree ../templates
 
 //= require_tree .

@@ -59,10 +59,12 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
     feedParams.user_id = SharedDataService.getCurrentUser().id;
     FeedService.createFeed(feedParams).then(function(resp){
       if (resp.status === 201){
-        // Update currentUser cookie with updated rss feeds
         UserService.findUserById(feedParams.user_id).then(function(resp){
+          // Update currentUser cookie with update user
           SharedDataService.updateUser(resp.data.user);
           self.userFeeds = SharedDataService.getCurrentUserFeeds();
+
+          // Completed task. Log the status and redirect back to feed.all
           console.log('Status 201. Created rss feed. Redirecting to feed display.');
           $state.go('feed.all', {}, {reload: true});
         });
@@ -73,15 +75,19 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
   };
 
   this.deleteFeed = function(feed_id){
-    // debugger;
     FeedService.deleteFeed(feed_id).then(function(resp){
       var user_id = SharedDataService.getCurrentUser().id;
-      // Update currentUser cookie with updated rss feeds
       UserService.findUserById(user_id).then(function(resp){
+        // Update currentUser cookie with update user
         SharedDataService.updateUser(resp.data.user);
         self.userFeeds = SharedDataService.getCurrentUserFeeds();
+
+        // Completed task. Log the status and redirect back to feed.all
         console.log('Success removing rss feed. You will no longer see thoses posts.');
         $state.go('feed.all', {}, {reload: true});
+
+        // Remove lingering modal backdrop after delete. Deleting the modal alone, does not remove the Bootstrap's modal backdrop
+        $('.modal-backdrop').remove();
       });
     });
   };
