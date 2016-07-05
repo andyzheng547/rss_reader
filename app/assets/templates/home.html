@@ -1,35 +1,37 @@
-<div class="home-nav">
-  <h4>Home Navigation</h4>
-  <ul class="navigation">
-    <!-- Show if not logged in -->
-    <span ng-show="!home.loggedIn()">
+<div class="container">
+  <!-- Navigation -->
+  <div class="home-nav row container-fluid">
+    <ul class="navigation row">
+      <!-- Show if not logged in -->
+      <span ng-show="!home.loggedIn()">
 
-      <li ui-sref-active="active">
-        <a ui-sref="user.login">Login</a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="user.register">Register</a>
-      </li>
+        <li ui-sref-active="active" class="col-xs-6">
+          <a ui-sref="user.login">Login</a>
+        </li>
+        <li ui-sref-active="active" class="col-xs-6">
+          <a ui-sref="user.register">Register</a>
+        </li>
 
-    </span>
+      </span>
 
-    <!-- Show if not logged in -->
-    <span ng-show="home.loggedIn()">
+      <!-- Show if logged in -->
+      <span ng-show="home.loggedIn()">
+        <li ui-sref-active="active" class="col-xs-4">
+          <a ui-sref="user.profile">Profile</a>
+        </li>
+        <li ui-sref-active="active" class="col-xs-4">
+          <a ui-sref="feed.all">RSS Feeds</a>
+        </li>
+        <li ui-sref-active="active" class="col-xs-4">
+          <a ui-sref="user.logoff">Logoff</a>
+        </li>
+      </span>
 
-      <li ui-sref-active="active">
-        <a ui-sref="user.logoff">Logoff</a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="user.profile">Profile</a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="feed.all">All Feeds</a>
-      </li>
-      
-    </span>
+    </ul>
+  </div>
 
-  </ul>
+  <!-- Body -->
+  <div class="row">
+    RSS Reader is a free to use web app for browsing through all your basic favorite rss feeds. To use the service, just register with a username and password. That is all; no personal info whatsoever. You can add your rss feeds and browse all your content in one place.
+  </div>
 </div>
-
-
-home placeholder
