@@ -1,63 +1,75 @@
-feed.create placeholder
+<!-- Forms -->
+<div class="row">
+  <!-- Create Rss Feed using input -->
+  <div class="col-xs-12 col-sm-6">
+    <h4>Add your rss feed</h4>
+    <form name="form" class="create-feed-form" ng-submit="feed.createFeed(feedParams)">
+      <title-input></title-input>
+      <description-input></description-input>
+      <rss-link-input></rss-link-input>
+      <link-input></link-input>
 
-<!-- Create Rss Feed using input -->
-<h1>Add your own rss feed</h1>
-<form name="form" class="create-feed-form" ng-submit="feed.createFeed(feedParams)">
-  <title-input></title-input>
-  <description-input></description-input>
-  <rss-link-input></rss-link-input>
-  <link-input></link-input>
+      <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Create Feed">
+    </form>
+  </div>
 
-  <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Create Feed">
-</form>
-
-<!-- Google Feed Service Form - Find RSS Feeds based on query -->
-<h1>or let Google Feed Service find one for you</h1>
-<form ng-submit="feed.discoverFeeds(query)">
-  <input type="text" name="query" ng-model="query">
-  <input type="submit" value="Discover RSS Feeds">
-</form>
+  <div class="col-xs-12 col-sm-6">
+    <!-- Google Feed Service Form - Find RSS Feeds based on query -->
+    <h4>or let Google Feed Service find one for you</h4>
+    <form ng-submit="feed.discoverFeeds(query)">
+      <input type="text" name="query" ng-model="query">
+      <input type="submit" value="Discover RSS Feeds">
+    </form>
+  </div>
+</div>
+<hr>
 
 <!-- Google Feed Search Results -->
-<h3>Results for {{query}}</h3>
-<div class="google-feed-search-results container" ng-repeat="result in feed.googleRssResults" ng-init="searchResults = {}">
-  <div class="feed-result row">
-    <!-- Display Result -->
-    <div class="col-xs-9">
-      <!-- Result Title -->
-      <h5 class="result-title"  ng-bind-html="result.title"></h5>
-      <!-- Result Description -->
-      <div class="result-description">
-        <strong>Description: </strong>
-        <span ng-bind-html="result.contentSnippet"></span>
-      </div>
-      <!-- Result Rss Link -->
-      <div class="result-rss-link">
-        <strong>RSS Feed: </strong>
-        <span ng-bind-html="result.url"></span>
-      </div>
-      <!-- Result Source -->
-      <div class="result-source">
-        <strong>Source: </strong>
-        <span ng-bind-html="result.link"></span>
-      </div>
-    </div>
+<div class="row" id="google-feed-results">
+  <div class="col-xs-12">
 
-    <span ng-init="searchResults.$index = {}">
-      <span ng-init="
-        searchResults.$index.title = result.title;
-        searchResults.$index.description = result.contentSnippet;
-        searchResults.$index.rss_link = result.url;
-        searchResults.$index.link = result.link">
-      </span>
-    </span>
+    <h4>Results for {{ query || 'query' }}</h4>
+    <div class="google-feed-search-results container" ng-repeat="result in feed.googleRssResults" ng-init="searchResults = {}">
+      <div class="feed-result row">
+        <!-- Display Result -->
+        <div class="col-xs-9">
+          <!-- Result Title -->
+          <h5 class="result-title"  ng-bind-html="result.title"></h5>
+          <!-- Result Description -->
+          <div class="result-description">
+            <strong>Description: </strong>
+            <span ng-bind-html="result.contentSnippet"></span>
+          </div>
+          <!-- Result Rss Link -->
+          <div class="result-rss-link">
+            <strong>RSS Feed: </strong>
+            <span ng-bind-html="result.url"></span>
+          </div>
+          <!-- Result Source -->
+          <div class="result-source">
+            <strong>Source: </strong>
+            <span ng-bind-html="result.link"></span>
+          </div>
+        </div>
 
-    <!-- Create Rss Feed from Result-->
-    <form class="rss-feed-form" ng-submit="feed.createFeed(searchResults.$index)">
-      <input type="submit" value="Add this rss feed">
-    </form>
+        <span ng-init="searchResults.$index = {}">
+          <span ng-init="
+            searchResults.$index.title = result.title;
+            searchResults.$index.description = result.contentSnippet;
+            searchResults.$index.rss_link = result.url;
+            searchResults.$index.link = result.link">
+          </span>
+        </span>
+
+        <!-- Create Rss Feed from Result-->
+        <form class="rss-feed-form" ng-submit="feed.createFeed(searchResults.$index)">
+          <input type="submit" value="Add this rss feed">
+        </form>
 
 
-  </div> <!-- End of Feed Result div -->
-  <hr>
-</div> <!-- End of Search Results div -->
+      </div> <!-- End of Feed Result div -->
+      <hr>
+    </div> <!-- End of Search Results div -->
+
+  </div> <!-- .col-xs-12 -->
+</div>

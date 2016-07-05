@@ -1,4 +1,4 @@
-function FeedController($http, $state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
+function FeedController($http, $state, $sce, $location, $anchorScroll, FeedService, UserService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
   // Add onload listener to iframe to check for same origin error
@@ -52,6 +52,8 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
     GoogleFeedsService.findRssFeed(query).then(function(resp){
       self.googleRssResults = resp.data.responseData.entries;
       console.log('You got this back from Google: \n\t' + JSON.stringify(resp));
+
+      $("html, body").delay(500).animate({scrollTop: $('#google-feed-results').offset().top }, 500);
     });
   };
 
