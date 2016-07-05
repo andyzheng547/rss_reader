@@ -14,7 +14,6 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
           console.log('iframe loaded: ' + self.currentLink);
         } else {
           console.log('iframe could not load: ' + self.currentLink);
-          alert('iframe could not be loaded. source refused to display.')
         }
       }
 
@@ -44,7 +43,7 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
   self.goToFeed = function(feed){
     SharedDataService.setCurrentFeedUrl(feed.rss_link);
 
-    $state.go('feed.read');
+    $state.go('feed.read', {}, {reload: true});
   };
 
   // Takes query from feed.create and finds rss feeds using Google Feed API
@@ -99,6 +98,7 @@ function FeedController($http, $state, $sce, FeedService, UserService, SharedDat
   }
 
   if ($state.current.name === "feed.read"){
+    self.userFeeds = SharedDataService.getCurrentUserFeeds();
     self.currentRssUrl = SharedDataService.getCurrentFeedUrl();
     self.loadCurrentFeed();
   }

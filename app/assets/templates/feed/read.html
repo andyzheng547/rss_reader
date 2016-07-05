@@ -1,28 +1,45 @@
-feed.read placeholder
-
-{{ feed.currentRssUrl }}
-
 <div class="container-fluid">
-
   <div class="row">
+    <!-- Switch Feeds with RSS Title Filter -->
+    <div class="col-xs-12 row">
+      <h5 class="col-xs-6">Switch Feed</h5>
 
-    <!-- Rss Feed -->
-    <div class="col-xs-6" ng-repeat="post in feed.currentFeed">
-      <div class="post-info">
-        <div class="post-title" style="color: blue" ng-click="feed.setCurrentLink(post.link)" ng-bind-html="post.title"></div>
-        <div class="post-author" ng-if="post.author  != '' ">
-          by <span ng-bind-html="post.author"></span>
-        </div>
-        <div ng-bind-html="post.publishedDate"></div>
+      <!-- rssFilter input - filter list by the title -->
+      <input ng-model="rssFilter" placeholder="Find your feed with title" class="col-xs-6">
+
+      <!-- Display user's filtered rss feed -->
+      <div ng-repeat="rssFeed in feed.userFeeds | filter:{title: rssFilter}" ng-if="rssFilter" class="col-xs-12">
+        <a href="" ng-click="feed.goToFeed(rssFeed)">{{rssFeed.title}}</a>
       </div>
     </div>
+    <hr>
 
-    {{ feed.currentLink }}
+    <!-- Rss Feed -->
+    <div class="col-xs-12">
+      <h5>Post Info</h5>
+      <div class="post-title" ng-bind-html="feed.currentFeed[currentPost - 1].title"></div>
+      <div class="post-author" ng-if="feed.currentFeed[currentPost - 1].author">
+        by <span ng-bind-html="feed.currentFeed[currentPost - 1].author"></span>
+      </div>
+      <div class="post-title" ng-bind-html="feed.currentFeed[currentPost - 1].publishedDate"></div>
 
-    <!-- iFrame - shows the post from the rss feed if possible  -->
-    <div class="col-xs-6">
-      <iframe ng-src="{{feed.currentLink}}" id="iframe"></iframe>
+      <uib-pager
+        total-items="feed.currentFeed.length"
+        items-per-page="1"
+        ng-init="currentPost = 1"
+        ng-model="currentPost"
+        ng-change="feed.setCurrentLink(feed.currentFeed[currentPost - 1].link)"></uib-pager>
     </div>
+
+  </div>
+  <hr>
+  
+  <div class="row">
+    <!-- iFrame - shows the post from the rss feed if possible  -->
+    <div class="col-xs-12">
+      <iframe ng-src="{{ feed.currentLink }}" id="iframe"></iframe>
+    </div>
+
   </div>
 
 </div>
