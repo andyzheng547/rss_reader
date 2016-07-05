@@ -5,3 +5,8 @@ html, body {
 .app-body {
   margin-top: 75px;
 }
+
+.app-body .row {
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}

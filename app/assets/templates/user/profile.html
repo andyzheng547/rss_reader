@@ -1,87 +1,102 @@
-user.profile placeholder
+<div class="row">
+  <!-- Update/Delete User -->
+  <div class="col-xs-12 col-sm-6 row">
+    <!-- Update user form -->
+    <div class="row">
+      <h2>Update Profile</h2>
+      <form name="form" ng-submit="user.updateUser(userParams)">
+        <!-- Update username input -->
+        <div class="form-group"
+          ng-class="{
+            'has-error': form.username.$touched && form.username.$invalid,
+            'has-success': form.username.$touched && form.username.$valid}">
 
-<h1>{{user.currentUser.username}}</h1>
+            <input type="text" name="username" placeholder="Update username (optional)"
+              ng-model="userParams.username"
+              username
+              minlength="4 if form.username.length != 0"
+              class="form-control">
 
-<h2>Update Profile</h2>
-<form name="form" ng-submit="user.updateUser(userParams)">
-  <!-- Update username input -->
-  <div class="form-group"
-    ng-class="{
-      'has-error': form.username.$touched && form.username.$invalid,
-      'has-success': form.username.$touched && form.username.$valid}">
+            <ng-messages for="form.username.$error" ng-if="form.username.$invalid" class="help-block">
+              <ng-message when="minlength">Username needs to be 4 characters minimum</ng-message>
+              <ng-message when="username">Only have letters, numbers and underscores</ng-message>
+            </ng-messages>
+        </div>
 
-      <input type="text" name="username" placeholder="Update username (optional)"
-        ng-model="userParams.username"
-        username
-        minlength="4 if form.username.length != 0"
-        class="form-control">
+        <!-- Current password input -->
+        <div class="form-group"
+          ng-class="{
+            'has-error': form.current_password.$touched && form.current_password.$invalid,
+            'has-success': form.current_password.$touched && form.current_password.$valid}">
 
-      <ng-messages for="form.username.$error" ng-if="form.username.$invalid" class="help-block">
-        <ng-message when="minlength">Username needs to be 4 characters minimum</ng-message>
-        <ng-message when="username">Only have letters, numbers and underscores</ng-message>
-      </ng-messages>
+          <input
+            type="password" name="current_password" placeholder="Password"
+            ng-model="userParams.current_password"
+            password
+            required="required"
+            minlength="8"
+            class="form-control">
+          <ng-messages for="form.current_password.$error" ng-if="form.current_password.$invalid" class="help-block">
+            <ng-message when="required">Required for updates!</ng-message>
+            <ng-message when="minlength">Password has to be 8 characters minimum</ng-message>
+            <ng-message when="password">Only letters and numbers</ng-message>
+          </ng-messages>
+        </div>
+
+        <!-- Update password input -->
+        <div class="form-group"
+          ng-class="{
+            'has-error': form.password.$touched && form.password.$invalid,
+            'has-success': form.password.$touched && form.password.$valid}">
+
+          <input
+            type="password" name="password" placeholder="Update password (optional)"
+            ng-model="userParams.password"
+            password
+            minlength="8"
+            class="form-control">
+          <ng-messages for="form.password.$error" ng-if="form.password.$invalid" class="help-block">
+            <ng-message when="minlength">Password has to be 8 characters minimum</ng-message>
+            <ng-message when="password">Only letters and numbers</ng-message>
+          </ng-messages>
+        </div>
+
+        <server-user-errors></server-user-errors>
+
+        <!-- Submit Form -->
+        <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Update profile">
+      </form>
+
+    </div> <!-- End of update user form -->
+
+    <div class="row">
+      <!-- Delete User -->
+      <h2>Delete user form</h2>
+      <div class="delete-user-div" ng-init="showDeleteButton = false">
+        <!-- Toggles delete user div -->
+        <button type="button" name="deleteUser" ng-click="showDeleteButton = !showDeleteButton">Delete account</button>
+
+        <!-- Delete user confirmation -->
+        <div class="delete-user-confirmation" ng-show="showDeleteButton">
+          <h2>Are you really sure?</h2>
+          <button type="button" name="no-delete" ng-click="showDeleteButton = false">No</button>
+          <button type="button" name="yes-delete" ng-click="user.deleteUser()">Yes</button>
+        </div>
+
+      </div>
+    </div> <!-- End of delete user -->
   </div>
 
-  <!-- Current password input -->
-  <div class="form-group"
-    ng-class="{
-      'has-error': form.current_password.$touched && form.current_password.$invalid,
-      'has-success': form.current_password.$touched && form.current_password.$valid}">
-
-    <input
-      type="text" name="current_password" placeholder="Password"
-      ng-model="userParams.current_password"
-      password
-      required="required"
-      minlength="8"
-      class="form-control">
-    <ng-messages for="form.current_password.$error" ng-if="form.current_password.$invalid" class="help-block">
-      <ng-message when="required">Required for updates!</ng-message>
-      <ng-message when="minlength">Password has to be 8 characters minimum</ng-message>
-      <ng-message when="password">Only letters and numbers</ng-message>
-    </ng-messages>
+  <!-- User Info -->
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <h2>User Info</h2>
+    </div>
+    <div class="row">
+      <strong>Username: </strong> <span>{{user.currentUser.username}}</span>
+    </div>
+    <div class="row">
+      <strong># rss feeds: </strong> <span>{{user.currentUser.rss_feeds.length}}</span>
+    </div>
   </div>
-
-  <!-- Update password input -->
-  <div class="form-group"
-    ng-class="{
-      'has-error': form.password.$touched && form.password.$invalid,
-      'has-success': form.password.$touched && form.password.$valid}">
-
-    <input
-      type="text" name="password" placeholder="Update password (optional)"
-      ng-model="userParams.password"
-      password
-      minlength="8"
-      class="form-control">
-    <ng-messages for="form.password.$error" ng-if="form.password.$invalid" class="help-block">
-      <ng-message when="minlength">Password has to be 8 characters minimum</ng-message>
-      <ng-message when="password">Only letters and numbers</ng-message>
-    </ng-messages>
-  </div>
-
-  <server-user-errors></server-user-errors>
-
-  <!-- Submit Form -->
-  <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Update profile">
-</form>
-
-{{userParams}}
-
-<h1>User info</h1>
-{{ user.currentUser }}
-
-<!-- Delete User -->
-<h1>Delete user form</h1>
-<div class="delete-user-div" ng-init="showDeleteButton = false">
-  <!-- Toggles delete user div -->
-  <button type="button" name="deleteUser" ng-click="showDeleteButton = true">Delete account</button>
-
-  <!-- Delete user confirmation -->
-  <div class="delete-user-confirmation" ng-show="showDeleteButton">
-    <h2>Are you really sure?</h2>
-    <button type="button" name="no-delete" ng-click="showDeleteButton = false">No</button>
-    <button type="button" name="yes-delete" ng-click="user.deleteUser()">Yes</button>
-  </div>
-
 </div>
