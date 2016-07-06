@@ -1,37 +1,36 @@
 ## RSS Reader - Angular
 
-_Basic models:_ User, Rss Feed
+[RSS Reader](https://rss-reader-az.herokuapp.com/) is a free to use web app for browsing through all your basic favorite rss feeds. Add your rss feeds and browse your content all in one place. To use the service, just register with a username and password. _RSS Reader does not collect or keep track of any personal info._ It is a free app available to anyone for public use.
 
-**_Angular states:_**
-1. **home** - introduction/about page of the app
-2. **user** - user state. has a navbar and a div with ui-view
-3. **user.login** - login to the app
-4. **user.logoff** - log out of the app
-5. **user.register** - register new account
-6. **feed** - feeds state. has a navbar and a div with ui-view
-7. **feed.create** - add a new rss feed to account
-8. **feed.manage** - see all rss feeds and can update/delete from page
-9. **feed.read** - saves rss feeds from google load user can navigate through rss feed without going to new page
-  - when user clicks next post, the iframe changes where it loads to be the next link
-10. **feed.all** - shows all the feeds for the user
-  - get feeds object based when initializing the service
-  - store inside this.feeds based on feed id
-  - when clicked, get id and search this.feeds for feed object,
-    then get and populate div with rss feed articles using google api
+RSS Reader makes use of the [Google Feed API](https://developers.google.com/feed "Google Feed API"). RSS Reader may break depending on changes made to Google's Feed API. __Note:__ Google Feed API's Terms of Service state that the depreciation notice does not apply as of April 20, 2015, however this is of course subject to change.
 
-### Controllers
-1. __UserController__ - controls the sessions and update account
-2. __FeedController__ - gets the users rss feeds and displays posts from feed
+The app can be found at: [https://rss-reader-az.herokuapp.com/](https://rss-reader-az.herokuapp.com/)
 
-### Services
-1. __SharedDataService__ - stores data to be shared between the controllers (user id, logged in status)
+## Getting Started (if you want to contribute or play with the source code)
 
-<!-- Inside FeedsService -->
-this.feeds = {
-  id1 = {info},
-  id2 = {info}
-}
+1. Clone this repository
 
-  <div data-id={{feed.id}} ng-click="findFeed(feed.id)">
+`$ git clone https://github.com/andyzheng547/rss_reader.git`
 
-  </div>
+2. Change directories
+
+`$ cd rss_reader`
+
+3. Go into the directory. Then create and migrate the database.
+
+`$ rake db:create RAILS_ENV=environment
+ $ rake db:migrate RAILS_ENV=environment`
+
+4. Open up the server
+
+`$ rails s or rails server`
+
+5. Go to `http://localhost:3000` in your browser and code away. Play with it to your heart's desire.
+
+## Contributing
+
+This application is built by Andy Zheng. The source code can be found on [Github](https://github.com/andyzheng547/rss_reader). I encourage you to take a look at the code and make changes if you want. If something is wrong or can be improved with the application, you can make a pull request with a detailed description of the feature/bug that you added or changed. You can also contact me [andy.zheng249@gmail.com](mailto:andy.zheng249@gmail.com), if that is too much work and you just wanted to make a suggestion.
+
+## License
+
+This open sources and under the MIT License. If you want to use the code, go wild.
