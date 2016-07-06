@@ -81,6 +81,3 @@ test:
 #
 production:
   <<: *default
-  database: rss_reader_production
-  username: rss_reader
-  password: <%= ENV['RSS_READER_DATABASE_PASSWORD'] %>

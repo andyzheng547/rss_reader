@@ -7,4 +7,4 @@ function HomeController(SharedDataService){
   };
 }
 
-angular.module('RssReaderApp').controller('HomeController', HomeController);
+angular.module('RssReaderApp').controller('HomeController', ['SharedDataService', HomeController]);

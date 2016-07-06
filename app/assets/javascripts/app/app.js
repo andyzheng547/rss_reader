@@ -1,6 +1,6 @@
 angular
   .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'ngMessages', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'templates'])
-  .config(function($stateProvider, $urlRouterProvider){
+  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
 
     function authenticate($q, $state, $timeout, SharedDataService){
@@ -89,10 +89,4 @@ angular
         controller: 'FeedController as feed',
         resolve: {authenticate: authenticate}
       })
-  })
-  .run(function($rootScope, SharedDataService){
-    $rootScope.loggedIn = function(){
-      var loggedIn = SharedDataService.getUserLoginStatus();
-      return loggedIn === 'true' ? true : false;
-    };
-  });
+  }]);

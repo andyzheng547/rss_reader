@@ -1,5 +1,5 @@
 angular.module('RssReaderApp')
-  .service('UserService', function($http, $q) {
+  .service('UserService', ['$http', '$q', function($http, $q) {
 
     // Takes the method to be called from $http and passes in the route and configurations
     // Will return the deferred promise containing either the user info or errors
@@ -67,4 +67,4 @@ angular.module('RssReaderApp')
       return this.makeAjaxCall(httpMethod, route);
     };
 
-});
+}]);

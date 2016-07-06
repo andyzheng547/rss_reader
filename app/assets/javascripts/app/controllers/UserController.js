@@ -1,4 +1,4 @@
-function UserController($http, $state, UserService, SharedDataService) {
+function UserController($state, UserService, SharedDataService) {
   var self = this;
   self.errors;
   self.currentUser = SharedDataService.getCurrentUser();
@@ -84,4 +84,7 @@ function UserController($http, $state, UserService, SharedDataService) {
   };
 }
 
-angular.module('RssReaderApp').controller('UserController', UserController);
+angular.module('RssReaderApp')
+  .controller('UserController',
+    ['$state', 'UserService', 'SharedDataService', UserController]
+  );

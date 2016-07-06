@@ -1,5 +1,5 @@
 angular.module('RssReaderApp')
-  .service('GoogleFeedsService', function($http) {
+  .service('GoogleFeedsService', ['$http', function($http) {
 
     // Takes a query and use Google's Feed Service to find a list rss feeds
     this.findRssFeed = function(query){
@@ -11,4 +11,4 @@ angular.module('RssReaderApp')
       return $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURI(rss_link));
     };
 
-});
+}]);

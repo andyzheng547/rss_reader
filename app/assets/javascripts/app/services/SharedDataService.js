@@ -1,5 +1,5 @@
 angular.module('RssReaderApp')
-  .service('SharedDataService', function($cookies, $q, GoogleFeedsService) {
+  .service('SharedDataService', ['$cookies', function($cookies) {
 
   // Handle User Sessions
     this.loginUser = function(user){
@@ -58,4 +58,4 @@ angular.module('RssReaderApp')
       console.log('Done. Current feed removed from cookies');
     };
 
-  });
+  }]);
