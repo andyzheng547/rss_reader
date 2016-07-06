@@ -5,14 +5,15 @@
       <h5 class="col-xs-6">Switch Feed</h5>
 
       <!-- rssFilter input - filter list by the title -->
-      <input ng-model="rssFilter" placeholder="Find your feed with title" class="col-xs-6">
+      <input ng-model="rssFilter" placeholder="Find your feed with title" class="col-xs-6" id="rss-filter-input">
 
       <!-- Display user's filtered rss feed -->
       <div ng-repeat="rssFeed in feed.userFeeds | filter:{title: rssFilter}" ng-if="rssFilter" class="col-xs-12">
         <a href="" ng-click="feed.goToFeed(rssFeed)">{{rssFeed.title}}</a>
       </div>
     </div>
-    <hr>
+    <br>
+    <hr class="separator">
 
     <!-- Rss Feed -->
     <div class="col-xs-12">
@@ -32,8 +33,8 @@
     </div>
 
   </div>
-  <hr>
-  
+  <hr class="separator">
+
   <div class="row">
     <!-- iFrame - shows the post from the rss feed if possible  -->
     <div class="col-xs-12">

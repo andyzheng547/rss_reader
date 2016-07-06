@@ -1,26 +1,22 @@
-<div class="user-nav row container-fluid">
-  <ul class="navigation row">
+<div class="row container-fluid">
+  <ul class="nav nav-pills row">
     <!-- Show if not logged in -->
-    <span ng-show="!user.loggedIn()">
-      <li ui-sref-active="active" class="col-xs-6">
-        <a ui-sref="user.login">Login</a>
-      </li>
-      <li ui-sref-active="active" class="col-xs-6">
-        <a ui-sref="user.register">Register</a>
-      </li>
-    </span>
+    <li ui-sref-active="active" ng-show="!user.loggedIn()" class="col-xs-3">
+      <a ui-sref="user.login">Login</a>
+    </li>
+    <li ui-sref-active="active" ng-show="!user.loggedIn()" class="col-xs-3">
+      <a ui-sref="user.register">Register</a>
+    </li>
 
     <!-- Show if logged in -->
-    <span ng-show="user.loggedIn()">
-      <li ui-sref-active="active" class="col-xs-4">
-        <a ui-sref="user.profile">Profile</a>
-      </li>
-      <li ui-sref-active="active" class="col-xs-4">
-        <a ui-sref="feed.all">RSS Feeds</a>
-      </li>
-      <li ui-sref-active="active" class="col-xs-4">
-        <a ui-sref="user.logoff">Log Off</a>
-      </li>
-    </span>
+    <li ui-sref-active="active" ng-show="user.loggedIn()" class="col-xs-3">
+      <a ui-sref="user.profile">Profile</a>
+    </li>
+    <li ui-sref-active="active" ng-show="user.loggedIn()" class="col-xs-3">
+      <a ui-sref="feed.all">RSS Feeds</a>
+    </li>
+    <li ui-sref-active="active" ng-show="user.loggedIn()" class="col-xs-3">
+      <a ui-sref="user.logoff">Log Off</a>
+    </li>
   </ul>
 </div>

@@ -9,16 +9,16 @@
       <rss-link-input></rss-link-input>
       <link-input></link-input>
 
-      <input type="submit" ng-disabled="form.$pristine || form.$invalid" value="Create Feed">
+      <input class="btn btn-primary btn-sm" type="submit" ng-disabled="form.$pristine || form.$invalid" value="Create Feed">
     </form>
   </div>
 
   <div class="col-xs-12 col-sm-6">
     <!-- Google Feed Service Form - Find RSS Feeds based on query -->
     <h4>or let Google Feed Service find one for you</h4>
-    <form ng-submit="feed.discoverFeeds(query)">
-      <input type="text" name="query" ng-model="query">
-      <input type="submit" value="Discover RSS Feeds">
+    <form ng-submit="feed.discoverFeeds(query)" name="google" class="row">
+      <input type="text" name="query" required minlength="1" ng-model="query" placeholder="Search term" class="col-xs-12">
+      <input class="btn btn-primary btn-sm" type="submit" value="Discover RSS Feeds" ng-disabled="google.$pristine || google.$invalid">
     </form>
   </div>
 </div>

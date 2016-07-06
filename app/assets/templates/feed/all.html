@@ -7,13 +7,13 @@
       <a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}" ng-bind-html="rssFeed.title" class="col-xs-12 col-sm-9"></a>
 
       <!-- Button - toggle delete feed modal -->
-      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#deleteFeed_{{rssFeed.id}}" class="col-xs-12 col-sm-3">
+      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete-feed-{{rssFeed.id}}" class="col-xs-12 col-sm-3">
         Delete this feed?
       </button>
     </div>
 
     <!-- Delete Feed Modal -->
-    <div class="modal fade" id="deleteFeed_{{rssFeed.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="delete-feed-{{rssFeed.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
 
