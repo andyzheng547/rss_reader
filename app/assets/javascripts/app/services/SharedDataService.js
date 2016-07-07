@@ -40,17 +40,17 @@ angular.module('RssReaderApp').service('SharedDataService', ['$cookies', functio
     };
 
   // Handles setting and clearing current feed
-  // Saves a rss url in cookies, which the controller can access to make ajax call to Google Feed API
-    this.getCurrentFeedUrl = function(){
+  // Saves the feed, which the controller can access for the url to make ajax call to Google Feed API
+    this.getCurrentFeed = function(){
       return $cookies.getObject('currentFeed');
     };
 
-    this.setCurrentFeedUrl = function(feed){
+    this.setCurrentFeed = function(feed){
       console.log('Setting current feed to: ' + feed);
       $cookies.putObject('currentFeed', feed);
     };
 
-    this.clearCurrentFeedUrl = function(){
+    this.clearCurrentFeed = function(){
       console.log('Removing current feed (' + self.getCurrentFeed() + ') from cookies');
       $cookies.remove('currentFeed');
 

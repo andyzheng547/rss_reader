@@ -24,24 +24,25 @@ var FeedController = function($state, $sce, FeedService, UserService, SharedData
     };
   };
 
-  // Gets when current rss feed when state is feed.read
-  self.loadCurrentFeed = function(){
-    // User Google Feed API to find current posts from that rss feed
-    GoogleFeedsService.loadRssFeed(self.currentRssUrl).then(function(resp){
-      self.attachIframeListener();
-      self.currentFeed = resp.data.responseData.feed.entries;
-      self.currentLink = $sce.trustAsResourceUrl(self.currentFeed[0].link);
-    });
-  };
-
   // Called from feed.read. Will reset currentLink, which is the iframes src
   self.setCurrentLink = function(link){
     self.currentLink = $sce.trustAsResourceUrl(link);
   };
 
+  // Gets when current rss feed when state is feed.read
+  self.loadCurrentFeed = function(){
+    // User Google Feed API to find current posts from that rss feed
+    GoogleFeedsService.loadRssFeed(self.currentRssUrl).then(function(resp){
+      self.attachIframeListener();
+      self.currentFeedPosts = resp.data.responseData.feed.entries;
+      self.setCurrentLink(self.currentFeedPosts[0].link);
+    });
+  };
+
   // Called when going to feed.read
   self.goToFeed = function(feed){
-    SharedDataService.setCurrentFeedUrl(feed.rss_link);
+    self.currentFeed = feed;
+    SharedDataService.setCurrentFeed(feed);
 
     $state.go('feed.read', {}, {reload: true});
   };
@@ -99,7 +100,8 @@ var FeedController = function($state, $sce, FeedService, UserService, SharedData
 
   if ($state.current.name === "feed.read"){
     self.userFeeds = SharedDataService.getCurrentUserFeeds();
-    self.currentRssUrl = SharedDataService.getCurrentFeedUrl();
+    self.currentFeed = SharedDataService.getCurrentFeed();
+    self.currentRssUrl = self.currentFeed.rss_link;
     self.loadCurrentFeed();
   }
 
