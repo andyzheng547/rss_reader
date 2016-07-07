@@ -1,0 +1,15 @@
+<div class="row">
+  <h1>Login</h1>
+
+  <form name="form" ng-submit="user.loginUser(userParams)">
+    <username-input></username-input>
+
+    <password-input></password-input>
+
+    <server-user-errors></server-user-errors>
+
+    <!-- Submit Form -->
+    <input class="btn btn-primary btn-sm" type="submit" ng-disabled="form.$pristine || form.$invalid" value="Login">
+  </form>
+
+</div>

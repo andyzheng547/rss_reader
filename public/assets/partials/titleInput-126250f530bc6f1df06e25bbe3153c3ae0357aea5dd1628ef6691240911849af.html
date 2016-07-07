@@ -1,0 +1,14 @@
+<!-- Title input -->
+<div class="form-group" ng-class="{
+  'has-error': form.title.$touched && form.title.$invalid,
+  'has-success': form.title.$touched && form.title.$valid}">
+
+  <input type="text" name="title" placeholder="RSS Feed Title"
+    ng-model="feedParams.title"
+    required
+    class="form-control">
+
+  <ng-messages for="form.title.$error" ng-if="form.title.$invalid" class="help-block">
+    <ng-message when="required">Required!</ng-message>
+  </ng-messages>
+</div>

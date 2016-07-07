@@ -1,0 +1,5 @@
+<div class="server-errors" ng-repeat="(attr, attrErrors) in user.errors">
+  <span ng-repeat="(index, error) in attrErrors">
+    {{attr}} - {{error}}
+  </span>
+</div>

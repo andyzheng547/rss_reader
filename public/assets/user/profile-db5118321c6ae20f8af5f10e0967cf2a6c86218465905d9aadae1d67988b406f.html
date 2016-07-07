@@ -1,0 +1,119 @@
+<div class="row">
+  <!-- Update/Delete User -->
+  <div class="col-xs-12 col-sm-6 container-fluid">
+    <!-- Update user form -->
+    <div class="row">
+      <h2>Update Profile</h2>
+      <form name="form" ng-submit="user.updateUser(userParams)">
+        <!-- Update username input -->
+        <div class="form-group"
+          ng-class="{
+            'has-error': form.username.$touched && form.username.$invalid,
+            'has-success': form.username.$touched && form.username.$valid}">
+
+            <input type="text" name="username" placeholder="Update username (optional)"
+              ng-model="userParams.username"
+              username
+              minlength="4 if form.username.length != 0"
+              class="form-control">
+
+            <ng-messages for="form.username.$error" ng-if="form.username.$invalid" class="help-block">
+              <ng-message when="minlength">Username needs to be 4 characters minimum</ng-message>
+              <ng-message when="username">Only have letters, numbers and underscores</ng-message>
+            </ng-messages>
+        </div>
+
+        <!-- Current password input -->
+        <div class="form-group"
+          ng-class="{
+            'has-error': form.current_password.$touched && form.current_password.$invalid,
+            'has-success': form.current_password.$touched && form.current_password.$valid}">
+
+          <input
+            type="password" name="current_password" placeholder="Password"
+            ng-model="userParams.current_password"
+            password
+            required="required"
+            minlength="8"
+            class="form-control">
+          <ng-messages for="form.current_password.$error" ng-if="form.current_password.$invalid" class="help-block">
+            <ng-message when="required">Required for updates!</ng-message>
+            <ng-message when="minlength">Password has to be 8 characters minimum</ng-message>
+            <ng-message when="password">Only letters and numbers</ng-message>
+          </ng-messages>
+        </div>
+
+        <!-- Update password input -->
+        <div class="form-group"
+          ng-class="{
+            'has-error': form.password.$touched && form.password.$invalid,
+            'has-success': form.password.$touched && form.password.$valid}">
+
+          <input
+            type="password" name="password" placeholder="Update password (optional)"
+            ng-model="userParams.password"
+            password
+            minlength="8"
+            class="form-control">
+          <ng-messages for="form.password.$error" ng-if="form.password.$invalid" class="help-block">
+            <ng-message when="minlength">Password has to be 8 characters minimum</ng-message>
+            <ng-message when="password">Only letters and numbers</ng-message>
+          </ng-messages>
+        </div>
+
+        <server-user-errors></server-user-errors>
+
+        <!-- Submit Form -->
+        <input class="btn btn-primary btn-sm" type="submit" ng-disabled="form.$pristine || form.$invalid" value="Update profile">
+      </form>
+
+    </div> <!-- End of update user form -->
+
+    <div class="row">
+      <!-- Delete User -->
+      <h2>Delete user form</h2>
+      <div class="delete-user-div">
+        <!-- Toggles delete user div -->
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete-user-modal" class="col-xs-12 col-sm-3">Delete account?</button>
+
+        <!-- Delete User Modal -->
+        <div class="modal fade" id="delete-user-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete account?</h4>
+              </div> <!-- modal-header -->
+
+              <div class="modal-body">
+                Are you sure? Your account cannot be recovered after deletion.
+              </div> <!-- modal-body -->
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-ng-click="user.deleteUser()" data-dismiss="modal">Confirm</button>
+              </div> <!-- .modal-footer -->
+
+            </div> <!-- .modal-content -->
+          </div> <!-- .modal-dialog -->
+        </div> <!-- .modal -->
+
+
+      </div>
+    </div> <!-- End of delete user -->
+  </div>
+
+  <!-- User Info -->
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <h2>User Info</h2>
+    </div>
+    <div class="row">
+      <strong>Username: </strong> <span>{{user.currentUser.username}}</span>
+    </div>
+    <div class="row">
+      <strong>No. rss feeds: </strong> <span>{{user.currentUser.rss_feeds.length}}</span>
+    </div>
+  </div>
+</div>

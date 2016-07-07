@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Switch Feeds with RSS Title Filter -->
+    <div class="col-xs-12 row">
+      <h5 class="col-xs-6">Switch Feed</h5>
+
+      <!-- rssFilter input - filter list by the title -->
+      <input ng-model="rssFilter" placeholder="Find your feed with title" class="col-xs-6" id="rss-filter-input">
+
+      <!-- Display user's filtered rss feed -->
+      <div ng-repeat="rssFeed in feed.userFeeds | filter:{title: rssFilter}" ng-if="rssFilter" class="col-xs-12">
+        <a href="" ng-click="feed.goToFeed(rssFeed)">{{rssFeed.title}}</a>
+      </div>
+    </div>
+    <br>
+    <hr class="separator">
+
+    <!-- Rss Feed -->
+    <div class="col-xs-12">
+      <h5>Post Info</h5>
+      <div class="post-title" ng-bind-html="feed.currentFeed[currentPost - 1].title"></div>
+      <div class="post-author" ng-if="feed.currentFeed[currentPost - 1].author">
+        by <span ng-bind-html="feed.currentFeed[currentPost - 1].author"></span>
+      </div>
+      <div class="post-title" ng-bind-html="feed.currentFeed[currentPost - 1].publishedDate"></div>
+
+      <uib-pager
+        total-items="feed.currentFeed.length"
+        items-per-page="1"
+        ng-init="currentPost = 1"
+        ng-model="currentPost"
+        ng-change="feed.setCurrentLink(feed.currentFeed[currentPost - 1].link)"></uib-pager>
+    </div>
+
+  </div>
+  <hr class="separator">
+
+  <div class="row">
+    <!-- iFrame - shows the post from the rss feed if possible  -->
+    <div class="col-xs-12">
+      <iframe ng-src="{{ feed.currentLink }}" id="iframe"></iframe>
+    </div>
+
+  </div>
+
+</div>

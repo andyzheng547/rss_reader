@@ -1,0 +1,14 @@
+<!-- Link input -->
+<div class="form-group" ng-class="{
+  'has-error': form.link.$touched && form.link.$invalid,
+  'has-success': form.link.$touched && form.link.$valid}">
+
+  <input type="url" name="link" placeholder="Source that rss feed pulls from"
+    ng-model="feedParams.link"
+    link
+    class="form-control">
+
+  <ng-messages for="form.link.$error" ng-if="form.link.$invalid" class="help-block">
+    <ng-message when="link">Needs to be a valid URL!</ng-message>
+  </ng-messages>
+</div>

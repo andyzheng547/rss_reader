@@ -1,0 +1,19 @@
+<!-- Username input -->
+<div class="form-group"
+  ng-class="{
+    'has-error': form.username.$touched && form.username.$invalid,
+    'has-success': form.username.$touched && form.username.$valid}">
+
+  <input
+    type="text" name="username" placeholder="Username"
+    ng-model="userParams.username"
+    username
+    required
+    minlength="4"
+    class="form-control">
+  <ng-messages for="form.username.$error" ng-if="form.username.$invalid" class="help-block">
+    <ng-message when="required">Required!</ng-message>
+    <ng-message when="minlength">Username needs to be 4 characters minimum</ng-message>
+    <ng-message when="username">Only have letters, numbers and underscores</ng-message>
+  </ng-messages>
+</div>

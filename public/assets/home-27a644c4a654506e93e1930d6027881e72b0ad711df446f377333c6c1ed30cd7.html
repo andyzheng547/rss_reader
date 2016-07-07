@@ -1,0 +1,34 @@
+<div class="container">
+  <!-- Navigation -->
+  <div class="row container-fluid">
+    <ul class="nav nav-pills row">
+      <!-- Show if not logged in -->
+      <li ui-sref-active="active" class="col-xs-3" ng-show="!home.loggedIn()">
+        <a ui-sref="user.login">Login</a>
+      </li>
+      <li ui-sref-active="active" class="col-xs-3" ng-show="!home.loggedIn()">
+        <a ui-sref="user.register">Register</a>
+      </li>
+      <!-- Show if logged in -->
+      <li ui-sref-active="active" class="col-xs-3"  ng-show="home.loggedIn()">
+        <a ui-sref="user.profile">Profile</a>
+      </li>
+      <li ui-sref-active="active" class="col-xs-3"  ng-show="home.loggedIn()">
+        <a ui-sref="feed.all">RSS Feeds</a>
+      </li>
+      <li ui-sref-active="active" class="col-xs-3"  ng-show="home.loggedIn()">
+        <a ui-sref="user.logoff">Logoff</a>
+      </li>
+    </ul>
+  </div>
+  <hr class="separator">
+
+  <!-- Body -->
+  <div class="row">
+    <div class="col-xs-12">
+      <p>
+        RSS Reader is a free to use web app for browsing through all your basic favorite rss feeds. To use the service, just register with a username and password. That is all. No personal info whatsoever. You can add your rss feeds and browse all your content in one place.
+      </p>
+    </div>
+  </div>
+</div>

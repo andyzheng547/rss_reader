@@ -1,0 +1,39 @@
+<div class="row">
+  <h1>Rss Feeds</h1>
+
+  <div class="user-feeds-display container-fluid" ng-repeat="rssFeed in feed.userFeeds" ng-init="showDeleteForm = {}">
+    <div class="row user-feed-link">
+      <!-- Click to view Rss Feed -->
+      <a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}" ng-bind-html="rssFeed.title" class="col-xs-12 col-sm-9"></a>
+
+      <!-- Button - toggle delete feed modal -->
+      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete-feed-{{rssFeed.id}}" class="col-xs-12 col-sm-3">
+        Delete this feed?
+      </button>
+    </div>
+
+    <!-- Delete Feed Modal -->
+    <div class="modal fade" id="delete-feed-{{rssFeed.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Delete {{rssFeed.title}} ?</h4>
+          </div> <!-- modal-header -->
+
+          <div class="modal-body">
+            Confirm - You want to delete {{rssFeed.title}} from your rss feeds
+          </div> <!-- modal-body -->
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-ng-click="feed.deleteFeed(rssFeed.id)" data-dismiss="modal">Confirm</button>
+          </div> <!-- .modal-footer -->
+
+        </div> <!-- .modal-content -->
+      </div> <!-- .modal-dialog -->
+    </div> <!-- .modal -->
+
+  </div>
+</div>
