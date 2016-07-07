@@ -3,7 +3,7 @@ angular
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
 
-    function authenticate($q, $state, $timeout, SharedDataService){
+    var authenticate = function($q, $state, $timeout, SharedDataService){
       // Logged in
       if (SharedDataService.getUserLoginStatus() === 'true') {
         return $q.when();
@@ -20,7 +20,7 @@ angular
         // Reject authenication and stop the state from loading
         return $q.reject();
       }
-    }
+    };
 
     $stateProvider
       .state('home', {
@@ -63,30 +63,30 @@ angular
         url: '/profile',
         templateUrl: 'user/profile.html',
         controller: 'UserController as user',
-        resolve: {authenticate: authenticate}
+        resolve: {authenticate: ['$q', '$state', '$timeout', 'SharedDataService', authenticate]}
       })
       .state('feed', {
         url: '/feed',
         templateUrl: 'feed.html',
         controller: 'FeedController as feed',
-        resolve: {authenticate: authenticate}
+        resolve: {authenticate: ['$q', '$state', '$timeout', 'SharedDataService', authenticate]}
       })
       .state('feed.all', {
         url: '/all',
         templateUrl: 'feed/all.html',
         controller: 'FeedController as feed',
-        resolve: {authenticate: authenticate}
+        resolve: {authenticate: ['$q', '$state', '$timeout', 'SharedDataService', authenticate]}
       })
       .state('feed.read', {
         url: '/read',
         templateUrl: 'feed/read.html',
         controller: 'FeedController as feed',
-        resolve: {authenticate: authenticate}
+        resolve: {authenticate: ['$q', '$state', '$timeout', 'SharedDataService', authenticate]}
       })
       .state('feed.create', {
         url: '/create',
         templateUrl: 'feed/create.html',
         controller: 'FeedController as feed',
-        resolve: {authenticate: authenticate}
+        resolve: {authenticate: ['$q', '$state', '$timeout', 'SharedDataService', authenticate]}
       })
   }]);

@@ -1,4 +1,4 @@
-function UserController($state, UserService, SharedDataService) {
+var UserController = function($state, UserService, SharedDataService) {
   var self = this;
   self.errors;
   self.currentUser = SharedDataService.getCurrentUser();
@@ -19,6 +19,7 @@ function UserController($state, UserService, SharedDataService) {
       if (resp.status === 200) {
         console.log('Found user account. Logging in now.');
         SharedDataService.loginUser(resp.data.user);
+        debugger;
         $state.go('user.profile');
       } else {
         self.updateErrors(resp.data.errors);
@@ -82,9 +83,8 @@ function UserController($state, UserService, SharedDataService) {
     console.log('User logged out');
     $state.go('user.login');
   };
-}
+};
 
-angular.module('RssReaderApp')
-  .controller('UserController',
-    ['$state', 'UserService', 'SharedDataService', UserController]
-  );
+UserController['$inject'] = ['$state', 'UserService', 'SharedDataService'];
+
+angular.module('RssReaderApp').controller('UserController', UserController);

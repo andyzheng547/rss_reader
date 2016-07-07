@@ -1,5 +1,4 @@
-angular.module('RssReaderApp')
-  .service('SharedDataService', ['$cookies', function($cookies) {
+angular.module('RssReaderApp').service('SharedDataService', ['$cookies', function($cookies) {
 
   // Handle User Sessions
     this.loginUser = function(user){

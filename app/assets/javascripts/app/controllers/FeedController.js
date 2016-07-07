@@ -1,4 +1,4 @@
-function FeedController($state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
+var FeedController = function($state, $sce, FeedService, UserService, SharedDataService, GoogleFeedsService) {
   var self = this;
 
   // Add onload listener to iframe to check for same origin error
@@ -103,9 +103,8 @@ function FeedController($state, $sce, FeedService, UserService, SharedDataServic
     self.loadCurrentFeed();
   }
 
-}
+};
 
-angular.module('RssReaderApp')
-  .controller('FeedController',
-    ['$state', '$sce', 'FeedService', 'UserService', 'SharedDataService', 'GoogleFeedsService', FeedController]
-  );
+FeedController['$inject'] = ['$state', '$sce', 'FeedService', 'UserService', 'SharedDataService', 'GoogleFeedsService'];
+
+angular.module('RssReaderApp').controller('FeedController', FeedController);

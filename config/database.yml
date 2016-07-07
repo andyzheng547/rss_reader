@@ -81,3 +81,5 @@ test:
 #
 production:
   <<: *default
+  database: rss_reader_production
+  template: template0
