@@ -4,7 +4,11 @@
   <div class="user-feeds-display container-fluid" ng-repeat="rssFeed in feed.userFeeds" ng-init="showDeleteForm = {}">
     <div class="row user-feed-link">
       <!-- Click to view Rss Feed -->
-      <a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}" ng-bind-html="rssFeed.title" class="col-xs-12 col-sm-9"></a>
+      <span  class="col-xs-12 col-sm-9">
+        <h5><a href="" ng-click="feed.goToFeed(rssFeed)" data-id="{{rssFeed.id}}" ng-bind-html="rssFeed.title"></a></h5>
+        <p ng-bind-html="rssFeed.description"></p>
+      </span>
+
 
       <!-- Button - toggle delete feed modal -->
       <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#delete-feed-{{rssFeed.id}}" class="col-xs-12 col-sm-3">
@@ -19,11 +23,11 @@
 
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Delete {{rssFeed.title}} ?</h4>
+            <h4 class="modal-title">Delete <span ng-bind-html="rssFeed.title"></span> ?</h4>
           </div> <!-- modal-header -->
 
           <div class="modal-body">
-            Confirm - You want to delete {{rssFeed.title}} from your rss feeds
+            Confirm - You want to delete <span ng-bind-html="rssFeed.title"></span> from your rss feeds
           </div> <!-- modal-body -->
 
           <div class="modal-footer">
