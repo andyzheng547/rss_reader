@@ -19,6 +19,7 @@ The app can be found at: [https://rss-reader-az.herokuapp.com/](https://rss-read
 3. Go into the directory. Then create and migrate the database.
 
 `$ rake db:create RAILS_ENV=environment
+
  $ rake db:migrate RAILS_ENV=environment`
 
 4. Open up the server
