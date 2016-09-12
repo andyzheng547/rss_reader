@@ -9,7 +9,7 @@ angular.module('RssReaderApp').service('SharedDataService', ['$window', function
   sessionStorage.removeItem('currentFeed');
 
 // If page is reloaded. Before page unloads resources, store currentUser and currentFeed.
-  window.onbeforeunload = () => {
+  window.onbeforeunload = function(){
     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
     sessionStorage.setItem('currentFeed', JSON.stringify(currentFeed));
   };

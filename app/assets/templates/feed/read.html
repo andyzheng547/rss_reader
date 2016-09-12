@@ -24,7 +24,7 @@
 
     <!-- Rss Feed -->
     <div class="col-xs-12">
-      <h5>Post Info (some will not show b/c access is denied)</h5>
+      <h5>Post Info</h5>
       <a href="{{feed.currentFeedPosts[currentPost - 1].link}}" class="post-title" ng-bind-html="feed.currentFeedPosts[currentPost - 1].title" target="_blank"></a>
       <div class="post-author" ng-show="feed.currentFeedPosts[currentPost - 1].author">
         by <span ng-bind-html="feed.currentFeedPosts[currentPost - 1].author"></span>
