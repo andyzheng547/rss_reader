@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Switch Feeds with RSS Title Filter -->
+    <div class="col-xs-12 row">
+      <!-- Shows Current RSS Feed -->
+      <div class="row">
+        <h5 class="col-xs-12 col-sm-6">Current Feed: </h5>
+        <a class="col-xs-12 col-sm-6" href="{{feed.currentFeed.link}}" target="_blank"><span ng-bind-html="feed.currentFeed.title"></span></a>
+      </div>
+
+      <!-- rssFilter input - filter list by the title -->
+      <div class="row">
+        <h5 class="col-xs-12 col-sm-6">Switch Feed:</h5>
+        <input ng-model="rssFilter" placeholder="Find your feed with title" class="col-xs-12 col-sm-6" id="rss-filter-input">
+      </div>
+
+      <!-- Display user's filtered rss feed -->
+      <div ng-repeat="rssFeed in feed.userFeeds | filter:{title: rssFilter}" ng-if="rssFilter" class="col-xs-12">
+        <a href="" ng-click="feed.goToFeed(rssFeed)"><span ng-bind-html="rssFeed.title"></span></a>
+      </div>
+    </div>
+    <hr class="separator">
+
+    <!-- Rss Feed -->
+    <div class="col-xs-12">
+      <h5>Post Info</h5>
+      <a href="{{feed.currentFeedPosts[currentPost - 1].link}}" class="post-title" ng-bind-html="feed.currentFeedPosts[currentPost - 1].title" target="_blank"></a>
+      <div class="post-author" ng-show="feed.currentFeedPosts[currentPost - 1].author">
+        by <span ng-bind-html="feed.currentFeedPosts[currentPost - 1].author"></span>
+      </div>
+      <div class="post-title" ng-bind-html="feed.currentFeedPosts[currentPost - 1].publishedDate"></div>
+
+      <uib-pager
+        total-items="feed.currentFeedPosts.length"
+        items-per-page="1"
+        ng-init="currentPost = 1"
+        ng-model="currentPost"
+        ng-change="feed.setCurrentLink(feed.currentFeedPosts[currentPost - 1].link)"></uib-pager>
+    </div>
+
+  </div>
+  <hr class="separator">
+
+  <div class="row">
+    <!-- iFrame - shows the post from the rss feed if possible  -->
+    <div class="col-xs-12">
+      <iframe ng-src="{{ feed.currentLink }}" id="iframe" sandbox="allow-scripts allow-same-origin"></iframe>
+    </div>
+
+  </div>
+
+</div>
