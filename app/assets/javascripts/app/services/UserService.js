@@ -33,7 +33,7 @@ angular.module('RssReaderApp')
     };
 
     // GET user from backend with user id
-    // For updating currentUser cookie when user is already logged in
+    // For updating currentUser when user is already logged in
     this.findUserById = function(user_id){
       var httpMethod = $http.get;
       var route = '/users/' + user_id;

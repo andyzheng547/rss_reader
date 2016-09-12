@@ -1,11 +1,11 @@
 angular
-  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'ngMessages', 'ngCookies', 'ngAnimate', 'ui.bootstrap', 'templates'])
+  .module('RssReaderApp', ['ui.router', 'ngSanitize', 'ng-rails-csrf', 'ngMessages', 'ngAnimate', 'ui.bootstrap', 'templates'])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/');
 
     var authenticate = function($q, $state, $timeout, SharedDataService){
       // Logged in
-      if (SharedDataService.getUserLoginStatus() === 'true') {
+      if (SharedDataService.getUserLoginStatus()) {
         return $q.when();
 
       // Not logged in

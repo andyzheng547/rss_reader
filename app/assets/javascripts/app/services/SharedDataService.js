@@ -1,60 +1,54 @@
-angular.module('RssReaderApp').service('SharedDataService', ['$cookies', function($cookies) {
+angular.module('RssReaderApp').service('SharedDataService', [function() {
 
-  // Handle User Sessions
-    this.loginUser = function(user){
-      $cookies.putObject('currentUser', user);
-      $cookies.put('loggedIn', true);
+// Set default values
+  var currentUser = {};
+  var loggedIn = false;
+  var currentFeed = {};
 
-      console.log('User is logged in.');
-    };
+// Handle User Sessions
+  var loginUser = user => {
+    currentUser = user;
+    loggedIn = true;
 
-    this.logoffUser = function(){
-      $cookies.remove('currentUser');
-      $cookies.remove('currentFeed');
-      $cookies.put('loggedIn', false);
+    console.log('User is logged in.');
+  };
 
-      console.log('User is logged off.');
-    };
+  var logoffUser = () => {
+    currentUser = {};
+    currentFeed = {};
+    loggedIn = false;
 
-    this.updateUser = function(user){
-      $cookies.putObject('currentUser', user);
+    console.log('User if logged off.');
+  };
 
-      console.log('Updated user.');
-    };
+  var updateUser = user => {
+    currentUser = user;
 
-  // Get User Info from Cookies
-    this.getCurrentUser = function(){
-      return $cookies.getObject('currentUser');
-    };
+    console.log('Updated user.');
+  };
 
-    this.getCurrentUserFeeds = function(){
-      return $cookies.getObject('currentUser').rss_feeds;
-    };
+// User info getters
+  var getCurrentUser = () => currentUser;
+  var getCurrentUserFeeds = () => currentUser.rss_feeds;
+  var getUserLoginStatus = () => loggedIn;
 
-    this.getUserLoginStatus = function(){
-      if (!$cookies.get('loggedIn')) {
-        $cookies.put('loggedIn', false);
-      }
+// Get and set user's current feed
+  var getCurrentFeed = () => currentFeed;
+  var setCurrentFeed = feed => {
+    currentFeed = feed;
+    console.log('Setting current feed to: ' + feed);
+  };
 
-      return $cookies.get('loggedIn');
-    };
+// Return service methods
+  return {
+    loginUser:            loginUser,
+    logoffUser:           logoffUser,
+    updateUser:           updateUser,
+    getCurrentUser:       getCurrentUser,
+    getCurrentUserFeeds:  getCurrentUserFeeds,
+    getUserLoginStatus:   getUserLoginStatus,
+    getCurrentFeed:       getCurrentFeed,
+    setCurrentFeed:       setCurrentFeed
+  };
 
-  // Handles setting and clearing current feed
-  // Saves the feed, which the controller can access for the url to make ajax call to Google Feed API
-    this.getCurrentFeed = function(){
-      return $cookies.getObject('currentFeed');
-    };
-
-    this.setCurrentFeed = function(feed){
-      console.log('Setting current feed to: ' + feed);
-      $cookies.putObject('currentFeed', feed);
-    };
-
-    this.clearCurrentFeed = function(){
-      console.log('Removing current feed (' + self.getCurrentFeed() + ') from cookies');
-      $cookies.remove('currentFeed');
-
-      console.log('Done. Current feed removed from cookies');
-    };
-
-  }]);
+}]);

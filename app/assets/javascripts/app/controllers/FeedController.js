@@ -62,7 +62,7 @@ var FeedController = function($state, $sce, FeedService, UserService, SharedData
     FeedService.createFeed(feedParams).then(function(resp){
       if (resp.status === 201){
         UserService.findUserById(feedParams.user_id).then(function(resp){
-          // Update currentUser cookie with update user
+          // Update currentUser with update user
           SharedDataService.updateUser(resp.data.user);
           self.userFeeds = SharedDataService.getCurrentUserFeeds();
 
@@ -80,7 +80,7 @@ var FeedController = function($state, $sce, FeedService, UserService, SharedData
     FeedService.deleteFeed(feed_id).then(function(resp){
       var user_id = SharedDataService.getCurrentUser().id;
       UserService.findUserById(user_id).then(function(resp){
-        // Update currentUser cookie with update user
+        // Update currentUser with update user
         SharedDataService.updateUser(resp.data.user);
         self.userFeeds = SharedDataService.getCurrentUserFeeds();
 

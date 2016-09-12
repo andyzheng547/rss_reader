@@ -5,7 +5,7 @@ var UserController = function($state, UserService, SharedDataService) {
 
   self.loggedIn = function(){
     var loggedIn = SharedDataService.getUserLoginStatus();
-    return loggedIn === 'true' ? true : false;
+    return loggedIn;
   };
 
   this.updateErrors = function(error){
@@ -51,7 +51,7 @@ var UserController = function($state, UserService, SharedDataService) {
       if (resp.status === 200) {
         console.log("Status 200. Updated user in database.");
 
-        // Update currentUser in cookies and then reset self.currentUser to reflect user changes
+        // Update currentUser in SharedDataService and then reset self.currentUser to reflect user changes
         SharedDataService.updateUser(resp.data.user);
         self.currentUser = SharedDataService.getCurrentUser();
 
@@ -68,7 +68,7 @@ var UserController = function($state, UserService, SharedDataService) {
     var user_id = SharedDataService.getCurrentUser().id;
 
     UserService.deleteUser(user_id).then(function(resp){
-      console.log('Successfully deleted user. Clearing user from cookies.')
+      console.log('Successfully deleted user. Removing user from memory.')
 
       SharedDataService.logoffUser();
       self.currentUser = SharedDataService.getCurrentUser();

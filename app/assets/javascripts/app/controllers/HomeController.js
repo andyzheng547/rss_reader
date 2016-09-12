@@ -3,7 +3,7 @@ var HomeController = function(SharedDataService){
 
   self.loggedIn = function(){
     var loggedIn = SharedDataService.getUserLoginStatus();
-    return loggedIn === 'true' ? true : false;
+    return loggedIn;
   };
 };
 

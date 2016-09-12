@@ -16,7 +16,6 @@
 //= require angular
 //= require angular-animate
 //= require angular-messages
-//= require angular-cookies
 //= require angular-sanitize
 //= require angular-ui-router
 //= require angular-rails-templates
