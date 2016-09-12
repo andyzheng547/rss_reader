@@ -88,5 +88,5 @@ angular
         templateUrl: 'feed/create.html',
         controller: 'FeedController as feed',
         resolve: {authenticate: ['$q', '$state', '$timeout', 'SharedDataService', authenticate]}
-      })
+      });
   }]);

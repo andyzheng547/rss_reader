@@ -19,7 +19,6 @@ var UserController = function($state, UserService, SharedDataService) {
       if (resp.status === 200) {
         console.log('Found user account. Logging in now.');
         SharedDataService.loginUser(resp.data.user);
-        debugger;
         $state.go('user.profile');
       } else {
         self.updateErrors(resp.data.errors);
