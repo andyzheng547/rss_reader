@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  require 'json'
-
+  
   # GET /users/find
   def find
     @user = User.find_by(username: user_params["username"])
