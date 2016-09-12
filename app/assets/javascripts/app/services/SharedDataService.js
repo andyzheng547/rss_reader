@@ -15,31 +15,39 @@ angular.module('RssReaderApp').service('SharedDataService', ['$window', function
   };
 
 // Handle User Sessions
-  var loginUser = user => {
+  var loginUser = function(user){
     currentUser = user;
     currentFeed = user.rss_feeds[0];
     console.log('User is logged in.');
   };
 
-  var logoffUser = () => {
+  var logoffUser = function(){
     currentUser = {};
     currentFeed = {};
     console.log('User if logged off.');
   };
 
-  var updateUser = user => {
+  var updateUser = function(user){
     currentUser = user;
     console.log('Updated user.');
   };
 
-// User info getters
-  var getCurrentUser = () => currentUser;
-  var getCurrentUserFeeds = () => currentUser.rss_feeds;
-  var getUserLoginStatus = () => !$.isEmptyObject(currentUser);
+// User Info getters
+  var getCurrentUser = function(){
+    return currentUser;
+  };
+  var getCurrentUserFeeds = function(){
+    return currentUser.rss_feeds;
+  };
+  var getUserLoginStatus = function(){
+    return !$.isEmptyObject(currentUser);
+  };
 
 // Get and set user's current feed
-  var getCurrentFeed = () => currentFeed;
-  var setCurrentFeed = feed => {
+  var getCurrentFeed = function(){
+    return currentFeed;
+  };
+  var setCurrentFeed = function(feed){
     currentFeed = feed;
     console.log('Setting current feed to: ' + feed);
   };
